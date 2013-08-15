@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Robot Control</title>
+	<style type="text/css">
+	* {
+		font-family: Arial, sans-serif;
+	}
+	</style>
+</head>
+<body>
+	<h1>Robot Control</h1>
+	<div>
+		Forward: Up Arrow<br>
+		Backward: Back Arrow<br>
+		Left: Left Arrow<br>
+		Right: Right Arrow<br>
+	</div>
+	<hr>
+	<div id="status"></div>
+
+	<script type="text/javascript">
+	var status = document.getElementById('status')
+
+	var control = {
+		handleEvent: function(e) {
+			if (e.type == 'keydown' || e.type == 'keyup') {
+
+				console.log('Got event: ', e.type, e.keyCode)
+
+				var req = new XMLHttpRequest()
+	   			var url = '/' + e.type + '/' + e.keyCode
+	   			req.open("GET", url, true)
+	   			req.send(null)
+	   
+	   			req.onreadystatechange = function() {
+					if (req.readyState == 4 || req.readyState == "complete") {
+						status.innerHTML = req.responseText
+					}   
+				}
+			}
+		}
+	}
+	window.addEventListener('keydown', control)
+	window.addEventListener('keyup', control)
+	</script>
+</body>
+</html>

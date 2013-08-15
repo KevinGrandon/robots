@@ -1,0 +1,10 @@
+{
+  "name": "kevin-hcr",
+  "version": "0.0.1",
+  "author": "Kevin Grandon",
+  "private": "true",
+  "dependencies" : {
+    "express"   :  "3.3.5",
+    "openni" :  "0.3.1"
+  }
+}

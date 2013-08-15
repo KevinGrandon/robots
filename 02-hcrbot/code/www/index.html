@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Chrome Browser
+		</title>
+		<style>
+		#info {
+		font-size: 20px;
+		}
+		#headline {
+		text-decoration: none
+		}
+		#results {
+		font-size: 14px;
+		font-weight: bold;
+		border: 1px solid #ddd;
+		padding: 15px;
+		text-align: left;
+		min-height: 150px;
+		max-height: 500px;
+		overflow: auto;
+		}
+		.interim {
+		color: gray;
+		display: block;
+		}
+		.final {
+		color: black;
+		padding-right: 3px;
+		}
+		.line {
+			display: block;
+		}
+		.button {
+		display: none;
+		}
+		.marquee {
+		margin: 20px auto;
+		}
+
+		#buttons {
+		margin: 10px 0;
+		position: relative;
+		top: -50px;
+		}
+		a.c1 {font-weight: normal;}
+		</style>
+	</head>
+	<body class="" id="grid">
+		<div class="browser-landing" id="main">
+			<div class="compact marquee-stacked" id="marquee">
+				<div class="marquee-copy">
+					<h1>Nigel</h1>
+				</div>
+			</div>
+			<div class="compact marquee">
+				<div id="info">
+					<p id="info_start">
+						<a href="#" onclick="startButton(event)">Click to begin commanding robot.</a>
+					</p>
+					<p id="info_speak_now" style="display:none">
+						Speak now.
+					</p>
+					<p id="info_no_speech" style="display:none">
+						No speech was detected. You may need to adjust your <a href=
+						"//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">microphone
+						settings</a>.
+					</p>
+					<p id="info_no_microphone" style="display:none">
+						No microphone was found. Ensure that a microphone is installed and that
+						<a href="//support.google.com/chrome/bin/answer.py?hl=en&amp;answer=1407892">
+						microphone settings</a> are configured correctly.
+					</p>
+					<p id="info_allow" style="display:none">
+						Click the "Allow" button above to enable your microphone.
+					</p>
+					<p id="info_denied" style="display:none">
+						Permission to use microphone was denied.
+					</p>
+					<p id="info_blocked" style="display:none">
+						Permission to use microphone is blocked. To change, go to
+						chrome://settings/contentExceptions#media-stream
+					</p>
+					<p id="info_upgrade" style="display:none">
+						Web Speech API is not supported by this browser. Upgrade to <a href=
+						"//www.google.com/chrome">Chrome</a> version 25 or later.
+					</p>
+				</div>
+				<div id="results">
+					<span class="final" id="final_span"></span> <span class="interim" id=
+					"interim_span"></span>
+				</div>
+			</div>
+		</div>
+<script>
+showInfo('info_start');
+
+var final_transcript = '';
+var recognizing = false;
+var ignore_onend;
+var start_timestamp;
+if (!('webkitSpeechRecognition' in window)) {
+	upgrade();
+	alert('Apis not supported!')
+}
+
+var recognition = new webkitSpeechRecognition();
+recognition.continuous = true;
+recognition.interimResults = true;
+
+recognition.onstart = function() {
+	recognizing = true;
+	showInfo('info_speak_now');
+};
+
+recognition.onerror = function(event) {
+	if (event.error == 'no-speech') {
+		showInfo('info_no_speech');
+		ignore_onend = true;
+	}
+	if (event.error == 'audio-capture') {
+		showInfo('info_no_microphone');
+		ignore_onend = true;
+	}
+	if (event.error == 'not-allowed') {
+		if (event.timeStamp - start_timestamp < 100) {
+			showInfo('info_blocked');
+		} else {
+			showInfo('info_denied');
+		}
+		ignore_onend = true;
+	}
+};
+
+recognition.onend = function() {
+	recognizing = false;
+	if (ignore_onend) {
+		return;
+	}
+	if (!final_transcript) {
+		showInfo('info_start');
+		return;
+	}
+	showInfo('');
+	if (window.getSelection) {
+		window.getSelection().removeAllRanges();
+		var range = document.createRange();
+		range.selectNode(document.getElementById('final_span'));
+		window.getSelection().addRange(range);
+	}
+};
+
+recognition.onresult = function(event) {
+	var interim_transcript = '';
+	if (typeof(event.results) == 'undefined') {
+		recognition.onend = null;
+		recognition.stop();
+		upgrade();
+		return;
+	}
+	for (var i = event.resultIndex; i < event.results.length; ++i) {
+		if (event.results[i].isFinal) {
+			final_transcript += event.results[i][0].transcript;
+		} else {
+			interim_transcript += event.results[i][0].transcript;
+		}
+	}
+
+	// Signal the backend
+	console.log('Checking for: ', final_transcript, commandMap, commandMap[final_transcript])
+	if (final_transcript && commandMap[final_transcript]) {
+		var req = new XMLHttpRequest()
+		var url = '/voice/' + commandMap[final_transcript]
+		req.open('GET', url, true)
+		req.send(null)
+
+		req.onreadystatechange = function() {
+			if (req.readyState == 4 || req.readyState == "complete") {
+				status.innerHTML = req.responseText
+			}   
+		}
+	}
+
+	final_span.innerHTML += '<span class="line">' + linebreak(final_transcript) + '</span>';
+	final_transcript = '';
+
+	interim_span.innerHTML = linebreak(interim_transcript);
+	if (final_transcript || interim_transcript) {
+		showButtons('inline-block');
+	}
+	var results = document.getElementById('results')
+	results.scrollTop = results.scroll
+};
+
+function upgrade() {
+	showInfo('info_upgrade');
+}
+
+var two_line = /\n\n/g;
+var one_line = /\n/g;
+function linebreak(s) {
+	return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+}
+
+function startButton(event) {
+	if (recognizing) {
+		recognition.stop();
+		return;
+	}
+	final_transcript = '';
+	recognition.lang = 'en-US';
+	recognition.start();
+	ignore_onend = false;
+	final_span.innerHTML = '';
+	interim_span.innerHTML = '';
+	showInfo('info_allow');
+	showButtons('none');
+	start_timestamp = event.timeStamp;
+}
+
+function showInfo(s) {
+	if (s) {
+		for (var child = info.firstChild; child; child = child.nextSibling) {
+			if (child.style) {
+				child.style.display = child.id == s ? 'inline' : 'none';
+			}
+		}
+		info.style.visibility = 'visible';
+	} else {
+		info.style.visibility = 'hidden';
+	}
+}
+
+var current_style;
+function showButtons(style) {
+	if (style == current_style) {
+		return;
+	}
+	current_style = style;
+}
+
+var commandMap = {
+	'follow'		: 'follow',
+	'follow me'		: 'follow',
+	'following'		: 'follow',
+	'Halloween'		: 'follow',
+
+	'patrol'		: 'patrol',
+
+	'stop'			: 'stop',
+	'stuff'			: 'stop',
+	'sup'			: 'stop',
+}
+		</script>
+	</body>
+</html>
