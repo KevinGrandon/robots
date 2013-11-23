@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "dumb robot is dumb",
   "dependencies": {
-    "dualshock-controller": "0.2.0"
+    "dualshock-controller": "0.2.0",
+    "pinio": "*"
   },
   "repository": {
     "type": "git",
