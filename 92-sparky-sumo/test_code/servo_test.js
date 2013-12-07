@@ -10,7 +10,7 @@ var sparky = new Sparky({
 var val = 0;
 (function toggle() {
 	val = 180 - val;
-	sparky.run('servowrite', 'A0', val);
-	sparky.run('servowrite', 'A1', val);
+	sparky.run('servowrite', 'A0,' + val);
+	sparky.run('servowrite', 'A1,' + val);
 	setTimeout(toggle, 3000);
 })();

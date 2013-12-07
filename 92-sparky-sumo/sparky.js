@@ -18,26 +18,26 @@ var throttleTime = 500
 ds.on('left:move', function(data) {
 	if (data.y < maxBound && data.y > minBound) {
 		console.log('Left -> Stop')
-		sparky.throttle(throttleTime).analogWrite('A1', 90);
-	} else if (data.y > maxBound) {
+		sparky.throttle(throttleTime).run('servowrite', 'A0,90');
+	} else if (data.y < maxBound) {
 		console.log('Left -> Forward')
-		sparky.throttle(throttleTime).analogWrite('A1', 180);
-	} else if (data.y < minBound) {
+		sparky.throttle(throttleTime).run('servowrite', 'A0,180');
+	} else if (data.y > minBound) {
 		console.log('Left -> Backward')
-		sparky.throttle(throttleTime).analogWrite('A1', 0);
+		sparky.throttle(throttleTime).run('servowrite', 'A0,0');
 	}
 })
 
 ds.on('right:move', function(data) {
 	if (data.x < maxBound && data.x > minBound) {
 		console.log('Right -> Stop')
-		sparky.throttle(throttleTime).analogWrite('A0', 90);
-	} else if (data.x > maxBound) {
+		sparky.throttle(throttleTime).run('servowrite', 'A1,90');
+	} else if (data.x < maxBound) {
 		console.log('Right -> Forward')
-		sparky.throttle(throttleTime).analogWrite('A0', 180);
-	} else if (data.x < minBound) {
+		sparky.throttle(throttleTime).run('servowrite', 'A1,0');
+	} else if (data.x > minBound) {
 		console.log('Right -> Backward')
-		sparky.throttle(throttleTime).analogWrite('A0', 0);
+		sparky.throttle(throttleTime).run('servowrite', 'A1,180');
 	}
 })
 
