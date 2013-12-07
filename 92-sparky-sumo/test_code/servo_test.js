@@ -1,5 +1,5 @@
 var Sparky = require('sparky')
-var config = require('./config')
+var config = require('./../config')
 
 var sparky = new Sparky({
 	deviceId: config.DEVICE_ID,
