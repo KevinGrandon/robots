@@ -11,17 +11,17 @@ pinio.on('ready', function(board) {
 			home: 500,
 			pwmPin: 5,
 			dirPin: 4
-		}),
-		// Base Tilt
+		}, board),
+		// Claw Open/Close
 		new Motor({
 			pot: 'A1',
 			min: 350,
 			max: 600,
-			home: 500,
+			home: 512,
 			pwmPin: 6,
 			dirPin: 7
-		}),
-		// Base Up/Down
+		}, board),
+		// Claw Up/Down
 		new Motor({
 			pot: 'A2',
 			min: 250,
@@ -29,8 +29,8 @@ pinio.on('ready', function(board) {
 			home: 505,
 			pwmPin: 9,
 			dirPin: 8
-		}),
-		// Claw Up/Down
+		}, board),
+		// Elbow Tilt
 		new Motor({
 			pot: 'A3',
 			min: 450,
@@ -38,15 +38,22 @@ pinio.on('ready', function(board) {
 			home: 545,
 			pwmPin: 10,
 			dirPin: 12
-		}),
-		// Claw Open/Close
+		}, board),
+		// Shoulder Tilt
 		new Motor({
 			pot: 'A4',
 			min: 162,
 			max: 450,
 			home: 350,
-			pwmPin: 11,
-			dirPin: 13
-		})
+			pwmPin: 3,
+			dirPin: 2
+		}, board)
 	]
+
+	var testMotor = motors[3]
+
+	testMotor.ccw()
+	setTimeout(function() {
+		testMotor.stop()
+	}, 400)
 })
