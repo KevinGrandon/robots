@@ -8,8 +8,8 @@ exports.getMotors =  function(board) {
 			min: 450,
 			max: 600,
 			home: 500,
-			dir1: 5,
-			dir2: 4
+			dir1: 4,
+			dir2: 5
 		}, board),
 		// Shoulder Tilt
 		new Motor({
@@ -26,8 +26,8 @@ exports.getMotors =  function(board) {
 			min: 475,
 			max: 600,
 			home: 540,
-			dir1: 10,
-			dir2: 12
+			dir1: 12,
+			dir2: 10
 		}, board),
 		// Wrist Tilt
 		new Motor({
@@ -35,8 +35,8 @@ exports.getMotors =  function(board) {
 			min: 570,
 			max: 600,
 			home: 595,
-			dir1: 9,
-			dir2: 8
+			dir1: 8,
+			dir2: 9
 		}, board),
 		// Claw Open/Close
 		new Motor({

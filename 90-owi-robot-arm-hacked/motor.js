@@ -1,6 +1,3 @@
-var MOTOR_SPEED = 100
-
-
 function Motor(config, board) {
 	this.config = config
 
