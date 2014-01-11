@@ -31,6 +31,15 @@ pinio.on('ready', function(board) {
 			process.exit()
 		}
 
+		// Handle full reset
+		if (key.name == 'space') {
+			motors.forEach(function(motor) {
+				motor.moveTo(motor.home)
+			})
+			return
+		}
+
+		// Motor movement
 		var keyConfig = commandMap[key.name]
 		var motor = motors[keyConfig[0]]
 		motor[keyConfig[1]]()

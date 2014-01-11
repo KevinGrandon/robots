@@ -4,6 +4,8 @@
 
 http://www.amazon.com/OWI-OWI-535-Robotic-Arm-Edge/dp/B0017OFRCY
 
+https://vine.co/v/h3PIn2azAAD
+
 The OWI Robotic Arm is a great little robotic arm with 5-degrees of freedom. It comes with a remote control with which you can manually control the robot. Unfortunately, there's no way to script the robot out of the box. While it's probably cheaper, and more efficient, to build your own robot arm using servos - trying to rig this thing up to an arduino can be quite the adventure. Taking this a step further, I wanted to be able to control the robotic arm using a Leap Motion, hooked up to my laptop.
 
 ## Controlling Motors

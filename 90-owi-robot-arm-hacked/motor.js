@@ -25,16 +25,17 @@ Motor.prototype = {
 		if (Math.abs(this.current - val) > this.potAllowance) {
 			this.current = val
 			console.log(this.config.pot + ' Updated: ' + val)
-			if (this.current > this.config.max) {
+			if (this.current > this.config.max && !this.trackTo) {
 				console.log(this.config.pot + ' min limit reached')
 				this.stop()
-			} else if (this.current < this.config.min) {
+			} else if (this.current < this.config.min && !this.trackTo) {
 				console.log(this.config.pot + ' max limit reached')
 				this.stop()
 			}
 
 			// If we have reached out tracking
 			if (this.trackTo && Math.abs(this.current - this.trackTo) < 10) {
+				console.log(this.config.pot + ' reached distance: ' + this.trackTo)
 				this.stop()
 			}
 		}
@@ -60,8 +61,15 @@ Motor.prototype = {
 
 	/**
 	 * Attempts to move the motor to a given potentiometer position
+	 * The position must be between the min and max bounds
 	 */
 	moveTo: function(pos) {
+
+		if (pos > this.max || pos < this.min) {
+			console.log(this.config.pot + " Tried to track out of bounds.")
+			return;
+		}
+
 		if (pos > this.current) {
 			console.log("Tracking to CCW: ", this.current, pos)
 			this.trackTo = pos
