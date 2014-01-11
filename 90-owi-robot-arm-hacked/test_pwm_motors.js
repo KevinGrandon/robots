@@ -2,6 +2,13 @@ var pinio = new (require('pinio')).Pinio()
 
 pinio.on('ready', function(board) {
 
+
+	var pot = board.pins('A3')
+	pot.read(function(val) {
+		console.log('Val is:', val)
+	})
+
+	/*
     var motor1 = board.pins(2)
     var motor2 = board.pins(3)
     motor1.output()
@@ -24,6 +31,7 @@ pinio.on('ready', function(board) {
     }, 4000)
 	*/
 
+	/*
 	motor1.high()
 
 	var val = 255
@@ -38,5 +46,6 @@ pinio.on('ready', function(board) {
 			clearTimeout(doWrite)
 		}
 	}, 500);
+*/
 })
 
