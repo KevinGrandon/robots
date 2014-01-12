@@ -64,7 +64,7 @@
 			clearTimeout(lastReq)
 		}
 		lastReq = setTimeout(function() {
-			console.log('Sending request: ', action)
+			console.log('Sending command: ', action)
 			drive(action)
 		}, 500)
 	}
@@ -94,8 +94,6 @@
 			var req = new XMLHttpRequest()
 			req.open('POST', 'https://api.spark.io/v1/devices/' + config.deviceId + '/servowrite', true)
 			req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-			//req.setRequestHeader('Content-type', 'application/json')
-			//req.responseType = 'json'
 			req.onload = function() {
 				console.log('Request done: ', req.responseText)
 			}
