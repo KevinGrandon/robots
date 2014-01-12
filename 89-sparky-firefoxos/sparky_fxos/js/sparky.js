@@ -83,10 +83,10 @@
 				args = ['A0,0', 'A1,180']
 				break;
 			case 'left':
-				args = ['A0,0', 'A1,0']
+				args = ['A0,90', 'A1,0']
 				break;
 			case 'right':
-				args = ['A0,180', 'A1,180']
+				args = ['A0,180', 'A1,90']
 				break;
 		}
 
