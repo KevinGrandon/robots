@@ -23,6 +23,7 @@ void setup() {
 }
 
 int pos = 0;
+int backticks = 0;
 
 int forwardStartSweep = 70;
 int forwardEndSweep = 110;
@@ -84,6 +85,12 @@ void loop() {
       fl.write(pos);
       rr.write(180 - pos);
       delay(15);
+    }
+
+    backticks++;
+    if (backticks > 10) {
+      backticks = 0;
+      forward = true;
     }
   }
 
