@@ -1,13 +1,20 @@
+#include "DistanceGP2Y0A21YK.h"
+
 #include <Servo.h>
 
-// When looking down from the rear of the robot.
+DistanceGP2Y0A21YK forwardSensor;
 
+int forwardDistValue;
+
+// When looking down from the rear of the robot.
 Servo fl;
 Servo fr;
 Servo rl;
 Servo rr;
 
 void setup() {
+  forwardSensor.begin(A2);
+
   fl.attach(10);
   fr.attach(11);
   rr.attach(9);
@@ -25,8 +32,19 @@ boolean forward = true;
 
 void loop() {
   
+  forwardDistValue = forwardSensor.getDistanceCentimeter();
+  
+  Serial.print("\nDistance in centimers: ");
+  Serial.print(forwardDistValue);  
+  
+  if (forward && forwardDistValue < 8 ) {
+    forward = false;
+  }
+  
   if (forward) {
 
+    Serial.println("\nMoving forward.");
+    
     fl.write(90);
     rr.write(90);
     
@@ -47,6 +65,8 @@ void loop() {
 
   } else {
 
+    Serial.println("\nMoving backward.");
+    
     fr.write(90);
     rl.write(90);
     
