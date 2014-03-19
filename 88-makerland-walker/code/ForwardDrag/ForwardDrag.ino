@@ -44,22 +44,22 @@ void loop() {
   if (forward) {
 
     Serial.println("\nMoving forward.");
-    
-    fl.write(90);
-    rr.write(90);
-    
-    for(pos = forwardStartSweep; pos < forwardEndSweep; pos += 1) {
-      fr.write(pos);
-      rl.write(180 - pos);
-      delay(15);
-    }
 
     fr.write(90);
     rl.write(90);
-
-    for(pos = forwardEndSweep; pos > forwardStartSweep; pos -= 1) {
+    
+    for(pos = forwardStartSweep; pos < forwardEndSweep; pos += 1) {
       fl.write(pos);
       rr.write(180 - pos);
+      delay(15);
+    }
+
+    fl.write(90);
+    rr.write(90);
+
+    for(pos = forwardEndSweep; pos > forwardStartSweep; pos -= 1) {
+      fr.write(pos);
+      rl.write(180 - pos);
       delay(15);
     }
 
@@ -67,21 +67,22 @@ void loop() {
 
     Serial.println("\nMoving backward.");
     
-    fr.write(90);
-    rl.write(90);
+  
+    fl.write(90);
+    rr.write(90);
     
     for(pos = forwardStartSweep; pos < forwardEndSweep; pos += 1) {
-      fl.write(pos);
-      rr.write(180 - pos);
+      fr.write(pos);
+      rl.write(180 - pos);
       delay(15);
     }
 
-    fl.write(90);
-    rr.write(90);
+    fr.write(90);
+    rl.write(90);
 
     for(pos = forwardEndSweep; pos > forwardStartSweep; pos -= 1) {
-      fr.write(pos);
-      rl.write(180 - pos);
+      fl.write(pos);
+      rr.write(180 - pos);
       delay(15);
     }
   }
