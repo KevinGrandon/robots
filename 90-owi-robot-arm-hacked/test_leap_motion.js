@@ -1,12 +1,13 @@
-var webSocket = require('ws'),
-    ws = new webSocket('ws://127.0.0.1:6437');
+var Leap = require('leapjs');
 
-ws.on('message', function(data, flags) {
-    //console.log(data)
-    data = JSON.parse(data)
-    console.log('length:', data.pointables && data.pointables.length)
-    if (data.pointables && data.pointables.length >= 2) {
-      var distance = data.pointables[1].tipPosition[0] - data.pointables[0].tipPosition[0]
-      console.log('Pointer distance: ', distance)
+Leap.loop(function(frame){
+
+  if (frame.hands[0]) {
+  	console.log('yaw is:', frame.hands[0].yaw());
+  }
+
+  if (frame.pointables && frame.pointables.length >= 2) {
+      var distance = frame.pointables[1].tipPosition[0] - frame.pointables[0].tipPosition[0]
+      //console.log('Pointer distance: ', distance)
     }
 });
