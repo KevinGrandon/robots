@@ -25,7 +25,6 @@ Motor.prototype = {
 		if (Math.abs(this.current - val) > this.potAllowance) {
 			this.current = val
 			console.log(this.config.pot + ' Updated: ' + val)
-			//return; // FOR DEBUG
 			if (this.current > this.config.max && !this.trackTo) {
 				console.log(this.config.pot + ' min limit reached')
 				this.stop()
@@ -72,13 +71,13 @@ Motor.prototype = {
 		}
 
 		if (pos > this.current) {
-			console.log("Tracking to CCW: ", this.current, pos)
+			console.log("Tracking to CW: ", this.current, pos)
 			this.trackTo = pos
-			this.ccw()
+			this.cw()
 		} else if (pos < this.current) {
 			console.log("Tracking to CCW: ", this.current, pos)
 			this.trackTo = pos
-			this.cw()
+			this.ccw()
 		}
 	},
 

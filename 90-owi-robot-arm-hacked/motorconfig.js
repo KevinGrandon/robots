@@ -5,24 +5,24 @@ exports.getMotors =  function(board) {
 	/*
 	return [
 		new Motor({
+			pot: 'A1',
+			min: 560,
+			max: 590,
+			home: 585,
+			dir1: 3,
+			dir2: 4
+		}, board),
+	];*/
+
+	return [
+		// Base tilt
+		new Motor({
 			pot: 'A5',
 			min: 250,
 			max: 430,
 			home: 350,
 			dir1: 11,
 			dir2: 12
-		}, board)
-	];
-	*/
-	return [
-		// Wrist tile, up down.
-		new Motor({
-			pot: 'A1',
-			min: 450,
-			max: 600,
-			home: 500,
-			dir1: 4,
-			dir2: 3
 		}, board),
 		// Shoulder Tilt
 		new Motor({
@@ -42,23 +42,23 @@ exports.getMotors =  function(board) {
 			dir1: 8,
 			dir2: 7
 		}, board),
+		// Wrist tile, up down.
+		new Motor({
+			pot: 'A1',
+			min: 560,
+			max: 590,
+			home: 585,
+			dir1: 3,
+			dir2: 4
+		}, board),
 		// Claw open/close.
 		new Motor({
 			pot: 'A4',
-			min: 570,
-			max: 600,
-			home: 595,
+			min: 270,
+			max: 485,
+			home: 385,
 			dir1: 9,
 			dir2: 10
 		}, board),
-		// Base tilt
-		new Motor({
-			pot: 'A5',
-			min: 250,
-			max: 430,
-			home: 350,
-			dir1: 11,
-			dir2: 12
-		}, board)
 	]
 }

@@ -11,16 +11,16 @@ pinio.on('ready', function(board) {
 	process.stdin.setRawMode(true);
 
 	var commandMap = {
-		q: [4, 'ccw'],
-		a: [4, 'cw'],
+		q: [0, 'ccw'],
+		a: [0, 'cw'],
 		w: [1, 'ccw'],
 		s: [1, 'cw'],
 		e: [2, 'ccw'],
 		d: [2, 'cw'],
-		r: [0, 'ccw'],
-		f: [0, 'cw'],
-		t: [3, 'ccw'],
-		g: [3, 'cw']
+		r: [3, 'ccw'],
+		f: [3, 'cw'],
+		t: [4, 'ccw'],
+		g: [4, 'cw']
 	}
 
 	// listen for the "keypress" event
