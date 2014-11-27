@@ -25,6 +25,7 @@ Motor.prototype = {
 		if (Math.abs(this.current - val) > this.potAllowance) {
 			this.current = val
 			console.log(this.config.pot + ' Updated: ' + val)
+			//return; // FOR DEBUG
 			if (this.current > this.config.max && !this.trackTo) {
 				console.log(this.config.pot + ' min limit reached')
 				this.stop()
