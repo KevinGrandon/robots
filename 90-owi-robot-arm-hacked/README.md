@@ -2,6 +2,10 @@
 
 ![OWI Robot Arm - Hacked](img/robot01.JPG)
 
+Recently rebuilt:
+
+![Rebuilt](img/robot02.jpg)
+
 http://www.amazon.com/OWI-OWI-535-Robotic-Arm-Edge/dp/B0017OFRCY
 
 https://vine.co/v/h3PIn2azAAD
