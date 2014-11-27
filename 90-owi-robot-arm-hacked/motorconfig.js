@@ -4,15 +4,15 @@ exports.getMotors =  function(board) {
 	/* for testing individual motors
 	return [
 		new Motor({
-			pot: 'A5',
-			min: 470,
-			max: 640,
-			home: 555,
-			dir1: 11,
-			dir2: 12
+			pot: 'A2',
+			min: 390,
+			max: 570,
+			home: 470,
+			dir1: 5,
+			dir2: 6
 		}, board),
 	];
-	*/
+	//*/
 
 	return [
 		// Base tilt
