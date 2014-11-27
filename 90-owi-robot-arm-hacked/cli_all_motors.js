@@ -13,8 +13,8 @@ pinio.on('ready', function(board) {
 	var commandMap = {
 		q: [0, 'ccw'],
 		a: [0, 'cw'],
-		w: [1, 'ccw'],
-		s: [1, 'cw'],
+		w: [1, 'cw'],
+		s: [1, 'ccw'],
 		e: [2, 'ccw'],
 		d: [2, 'cw'],
 		r: [3, 'ccw'],

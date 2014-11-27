@@ -1,35 +1,35 @@
 var Motor = require('./motor').Motor
 
 exports.getMotors =  function(board) {
-	/*for testing */
-	/*
+	/* for testing individual motors
 	return [
 		new Motor({
-			pot: 'A1',
-			min: 560,
-			max: 590,
-			home: 585,
-			dir1: 3,
-			dir2: 4
+			pot: 'A5',
+			min: 470,
+			max: 640,
+			home: 555,
+			dir1: 11,
+			dir2: 12
 		}, board),
-	];*/
+	];
+	*/
 
 	return [
 		// Base tilt
 		new Motor({
 			pot: 'A5',
-			min: 250,
-			max: 430,
-			home: 350,
+			min: 470,
+			max: 640,
+			home: 555,
 			dir1: 11,
 			dir2: 12
 		}, board),
 		// Shoulder Tilt
 		new Motor({
 			pot: 'A2',
-			min: 450,
-			max: 640,
-			home: 540,
+			min: 390,
+			max: 570,
+			home: 470,
 			dir1: 5,
 			dir2: 6
 		}, board),
@@ -39,8 +39,8 @@ exports.getMotors =  function(board) {
 			min: 475,
 			max: 600,
 			home: 540,
-			dir1: 8,
-			dir2: 7
+			dir1: 7,
+			dir2: 8
 		}, board),
 		// Wrist tile, up down.
 		new Motor({
