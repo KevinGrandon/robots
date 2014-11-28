@@ -19,8 +19,8 @@ pinio.on('ready', function(board) {
 		d: [2, 'cw'],
 		r: [3, 'ccw'],
 		f: [3, 'cw'],
-		t: [4, 'ccw'],
-		g: [4, 'cw']
+		t: [4, 'cw'],
+		g: [4, 'ccw']
 	}
 
 	// listen for the "keypress" event
@@ -41,6 +41,11 @@ pinio.on('ready', function(board) {
 
 		// Motor movement
 		var keyConfig = commandMap[key.name]
+		if (!keyConfig) {
+			console.log('could not find command for:', key.name);
+			return;
+		}
+
 		var motor = motors[keyConfig[0]]
 		motor[keyConfig[1]]()
 		setTimeout(function() {

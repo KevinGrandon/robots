@@ -3,7 +3,7 @@ var pinio = new (require('pinio')).Pinio()
 pinio.on('ready', function(board) {
 
 
-	var pot = board.pins('A5')
+	var pot = board.pins('A4')
 	pot.read(function(val) {
 		console.log('Val is:', val)
 	})
