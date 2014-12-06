@@ -1,43 +1,87 @@
-/**
- * Dualspark is a sumobot built with a Sparkcore, and PS3 dualshock controller.
- */
-
 var ds = require('dualshock-controller')()
-var Sparky = require('sparky')
+var Spark = require("spark-io");
 var config = require('./config')
 
-var sparky = new Sparky({
-	deviceId: config.DEVICE_ID,
-	token: config.ACCESS_TOKEN
-})
+var board = new Spark({
+	token: config.ACCESS_TOKEN,
+	deviceId: config.DEVICE_ID
+});
+
+var ctx;
+
+console.log('connecting...', config.ACCESS_TOKEN, config.DEVICE_ID);
+board.on("ready", function() {
+	console.log('!!!!!!!!!!!!!!');
+	console.log('board is ready');
+	console.log('!!!!!!!!!!!!!!');
+	ctx = this;
+
+	ctx.pinMode('A0', this.MODES.SERVO);
+	ctx.pinMode('A1', this.MODES.SERVO);
+
+	ctx.pinMode('A4', this.MODES.SERVO);
+	ctx.pinMode('A5', this.MODES.SERVO);
+
+	ctx.servoWrite('A4', 90);
+	ctx.servoWrite('A5', 90);
+});
 
 var minBound = 120
 var maxBound = 135
-var throttleTime = 500
+
+var lastWrites = {};
+
+function servoWrite(pin, value) {
+	if (lastWrites[pin] !== undefined && lastWrites[pin] === value) {
+		return;
+	}
+	ctx.servoWrite(pin, value);
+	lastWrites[pin] = value;
+}
+
+ds.on('l1:press', function(data) {
+	if (!ctx) { return; }
+
+	console.log('l1 press', data)
+	servoWrite('A4', 180);
+	servoWrite('A5', 0);
+})
+
+ds.on('r1:press', function(data) {
+	if (!ctx) { return; }
+
+	console.log('r1 press', data)
+	servoWrite('A4', 0);
+	servoWrite('A5', 180);
+})
 
 ds.on('left:move', function(data) {
+	if (!ctx) { return; }
+
 	if (data.y < maxBound && data.y > minBound) {
-		console.log('Left -> Stop')
-		sparky.throttle(throttleTime).run('servowrite', 'A0,90');
+		console.log('Left -> Stop', data.y)
+		servoWrite('A0', 90);
 	} else if (data.y < maxBound) {
-		console.log('Left -> Forward')
-		sparky.throttle(throttleTime).run('servowrite', 'A0,180');
+		console.log('Left -> Forward', data.y)
+		servoWrite('A0', 180);
 	} else if (data.y > minBound) {
-		console.log('Left -> Backward')
-		sparky.throttle(throttleTime).run('servowrite', 'A0,0');
-	}
+		console.log('Left -> Backward', data.y)
+		servoWrite('A0', 0);
+	}	
 })
 
 ds.on('right:move', function(data) {
-	if (data.x < maxBound && data.x > minBound) {
-		console.log('Right -> Stop')
-		sparky.throttle(throttleTime).run('servowrite', 'A1,90');
-	} else if (data.x < maxBound) {
-		console.log('Right -> Forward')
-		sparky.throttle(throttleTime).run('servowrite', 'A1,0');
-	} else if (data.x > minBound) {
-		console.log('Right -> Backward')
-		sparky.throttle(throttleTime).run('servowrite', 'A1,180');
+	if (!ctx) { return; }
+
+	if (data.y < maxBound && data.y > minBound) {
+		console.log('Right -> Stop', data.y)
+		servoWrite('A1', 90);
+	} else if (data.y < maxBound) {
+		console.log('Right -> Forward', data.y)
+		servoWrite('A1', 0);
+	} else if (data.y > minBound) {
+		console.log('Right -> Backward', data.y)
+		servoWrite('A1', 180);
 	}
 })
 

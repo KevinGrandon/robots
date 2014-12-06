@@ -74,6 +74,7 @@ pinio.on('ready', function(board) {
 
 			// Check that we have met some minimum threshold of movement so we don't keep
 			// updating the motors if not needed.
+			console.log('fingerDistance', fingerDistance)
 			if (fingerDistance && Math.abs(lastFingerDistance - fingerDistance) > fingerThreshold) {
 				var fingerMotor = motors[4]
 				// Invert the scale for the fingers.

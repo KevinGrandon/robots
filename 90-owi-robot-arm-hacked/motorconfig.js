@@ -36,9 +36,9 @@ exports.getMotors =  function(board) {
 		// Elbow Tilt
 		new Motor({
 			pot: 'A3',
-			min: 475,
-			max: 600,
-			home: 540,
+			min: 300,
+			max: 540,
+			home: 400,
 			dir1: 7,
 			dir2: 8
 		}, board),
