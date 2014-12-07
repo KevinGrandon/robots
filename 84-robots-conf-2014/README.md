@@ -1,3 +1,10 @@
+# Tankbot
+
+![Tankbot](img/tankbot01.jpg)
+
+Tankbot a Pololu Zumo Robot, hooked up with a spark core and a gamepad for control.
+
+
 # Stick Sumo Bot
 
 ![Stick Sumo Bot](img/robot01.jpg)
