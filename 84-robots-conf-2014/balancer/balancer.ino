@@ -21,7 +21,7 @@ void setup(){
   setupL3G4200D(2000); // Configure L3G4200  - 250, 500 or 2000 deg/sec
 
   uView.clear(PAGE); // clears page
-  uView.print("Starting up...");
+  uView.print("Starting.");
   uView.display();
 
   delay(1500); //wait for the sensor to be ready 
@@ -30,15 +30,18 @@ void setup(){
 void loop(){
   getGyroValues();  // This will update x, y, and z with new values
   uView.clear(PAGE); // clears page
-  
+  uView.setCursor(0, 0);
+ 
   uView.print("X:");
   uView.print(x);
+  uView.print("\n");
 
-  uView.print(" Y:");
+  uView.print("Y:");
   uView.print(y);
+  uView.print("\n");
 
-  uView.print(" Z:");
-  uView.printl(z);
+  uView.print("Z:");
+  uView.print(z);
 
   uView.display();
   delay(100);
