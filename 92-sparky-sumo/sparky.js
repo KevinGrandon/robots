@@ -39,20 +39,23 @@ function servoWrite(pin, value) {
 	lastWrites[pin] = value;
 }
 
+var attackArmMin = 0;
+var attackArmMax = 180;
+
 ds.on('l1:press', function(data) {
 	if (!ctx) { return; }
 
 	console.log('l1 press', data)
-	servoWrite('A4', 180);
-	servoWrite('A5', 0);
+	servoWrite('A4', attackArmMax);
+	servoWrite('A5', attackArmMin);
 })
 
 ds.on('r1:press', function(data) {
 	if (!ctx) { return; }
 
 	console.log('r1 press', data)
-	servoWrite('A4', 0);
-	servoWrite('A5', 180);
+	servoWrite('A4', attackArmMin);
+	servoWrite('A5', attackArmMax);
 })
 
 ds.on('left:move', function(data) {
