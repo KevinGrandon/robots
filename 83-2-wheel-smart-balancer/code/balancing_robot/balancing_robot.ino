@@ -13,11 +13,12 @@ int16_t gx, gy, gz;
 #define Gry_offset 0 
 #define Gyr_Gain 0.00763358  
 #define Angle_offset 1.37 // between 1.25 and 1.5
-#define RMotor_offset 20
-#define LMotor_offset 20
+#define RMotor_offset 18
+#define LMotor_offset 22
 #define pi 3.14159 
 
 long data;
+long sticks[2];
 int x, y;
 float kp, ki, kd; 
 float r_angle, f_angle, omega;
@@ -53,7 +54,7 @@ void setup() {
   Mirf.spi = &MirfHardwareSpi;   
   Mirf.init();
   Mirf.setRADDR((byte *)"serv1");
-  Mirf.payload = sizeof(long);
+  Mirf.payload = sizeof(long) * 2;
   Mirf.config();
   Serial.begin(115200);
 }
@@ -75,12 +76,12 @@ void loop() {
 
 void Recive(){
   if(!Mirf.isSending() && Mirf.dataReady()){
-    Mirf.getData((byte *)&data);
+    Mirf.getData((byte *)&sticks);
     Mirf.rxFifoEmpty();
-    
-    x = data >> 16;
-    y = data & 0x0000ffff;
-    
+
+    x = sticks[0];
+    y = sticks[1] * -1;
+
     if(x >= 520){
       Run_Speed_K = map(x, 520, 1023, 0, 100);
       Run_Speed_K = Run_Speed_K / 50;
@@ -94,6 +95,11 @@ void Recive(){
     else{
       Run_Speed_K = 0;
     }
+    Serial.print("  \ngot x/y=");
+    Serial.print(x);
+    Serial.print("/");
+    Serial.print(y);
+    Serial.print("\n");
     if(y >= 520){
       Turn_Speed = map(y, 520, 1023, 0, 20);
     }
