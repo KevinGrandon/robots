@@ -12,7 +12,7 @@ int16_t gx, gy, gz;
 
 #define Gry_offset 0 
 #define Gyr_Gain 0.00763358  
-#define Angle_offset 0
+#define Angle_offset 1.37 // between 1.25 and 1.5
 #define RMotor_offset 20
 #define LMotor_offset 20
 #define pi 3.14159 
@@ -110,13 +110,9 @@ void Recive(){
 }
 
 void myPID(){
-  kp = analogRead(A0)*0.1;  Serial.print("  kp=");Serial.print(kp);
-  kd = analogRead(A2)*1.0;  Serial.print("  kd=");Serial.print(kd);
-  //ki = analogRead(A3)*0.001;  Serial.print("  ki=");Serial.print(ki);
-
-  //kp = 0;  Serial.print("  kp=");Serial.print(kp);
-  //kd = 0;  Serial.print("  kd=");Serial.print(kd);
-  ki = 0;  Serial.print("  ki=");Serial.print(ki);
+  kp = 18;  Serial.print("  kp=");Serial.print(kp);
+  kd = 700;  Serial.print("  kd=");Serial.print(kd);
+  ki = 0.1;  Serial.print("  ki=");Serial.print(ki);
    
   unsigned long now = millis();
   float dt = (now - preTime) / 1000.0;
