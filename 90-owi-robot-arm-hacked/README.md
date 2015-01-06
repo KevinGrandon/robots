@@ -12,6 +12,12 @@ https://vine.co/v/h3PIn2azAAD
 
 The OWI Robotic Arm is a great little robotic arm with 5-degrees of freedom. It comes with a remote control with which you can manually control the robot. Unfortunately, there's no way to script the robot out of the box. While it's probably cheaper, and more efficient, to build your own robot arm using servos - trying to rig this thing up to an arduino can be quite the adventure. Taking this a step further, I wanted to be able to control the robotic arm using a Leap Motion, hooked up to my laptop.
 
+## Breadboard Schematic
+
+Note: this schematic won't work 100% with the code in this repo, but it should give you a good idea of what's needed.
+
+![Breadboard Schematic](img/fritzing.png)
+
 ## Controlling Motors
 
 I used a great little dual motor driver from Pololu here: http://www.pololu.com/product/2130. Each one of these can control two motors, utilizing PWM for speed control. Being that there are five motors on the robotic arm, you will need three of these motor drivers if you want to control all of them.
