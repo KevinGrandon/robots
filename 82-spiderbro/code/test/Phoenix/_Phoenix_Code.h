@@ -88,84 +88,82 @@ static const word GetSin[] PROGMEM = {
 // BUGBUG: Need a cleaner way to define...
 // Lets allow for which legs servos to be inverted to be defined by the robot
 // This is used by the Lynxmotion Symetrical Quad.
-#ifndef cRRCoxaInv
-#define cRRCoxaInv 1 
+#ifndef r4CoxaInv
+#define r4CoxaInv 1 
 #endif
-#ifndef cRMCoxaInv 
-#define cRMCoxaInv 1 
+#ifndef r3CoxaInv 
+#define r3CoxaInv 1 
 #endif
-#ifndef cRFCoxaInv 
-#define cRFCoxaInv 1 
+#ifndef r2CoxaInv 
+#define r2CoxaInv 1 
 #endif
-
-#ifndef cLRCoxaInv 
-#define cLRCoxaInv 0 
-#endif
-#ifndef cLMCoxaInv 
-#define cLMCoxaInv 0 
-#endif
-#ifndef cLFCoxaInv 
-#define cLFCoxaInv 0 
+#ifndef r1CoxaInv 
+#define r1CoxaInv 1 
 #endif
 
-#ifndef cRRFemurInv 
-#define cRRFemurInv 1 
+#ifndef l4CoxaInv 
+#define l4CoxaInv 0 
 #endif
-#ifndef cRMFemurInv 
-#define cRMFemurInv 1 
+#ifndef l3CoxaInv 
+#define l3CoxaInv 0 
 #endif
-#ifndef cRFFemurInv 
-#define cRFFemurInv 1 
+#ifndef l2CoxaInv 
+#define l2CoxaInv 0 
 #endif
-
-#ifndef cLRFemurInv 
-#define cLRFemurInv 0 
-#endif
-#ifndef cLMFemurInv 
-#define cLMFemurInv 0 
-#endif
-#ifndef cLFFemurInv 
-#define cLFFemurInv 0 
+#ifndef l1CoxaInv 
+#define l1CoxaInv 0 
 #endif
 
-#ifndef cRRTibiaInv 
-#define cRRTibiaInv 1 
+#ifndef r4FemurInv 
+#define r4FemurInv 1 
 #endif
-#ifndef cRMTibiaInv 
-#define cRMTibiaInv 1 
+#ifndef r3FemurInv 
+#define r3FemurInv 1 
 #endif
-#ifndef cRFTibiaInv 
-#define cRFTibiaInv 1 
+#ifndef r2FemurInv 
+#define r2FemurInv 1 
 #endif
-
-#ifndef cLRTibiaInv 
-#define cLRTibiaInv 0 
-#endif
-#ifndef cLMTibiaInv 
-#define cLMTibiaInv 0 
-#endif
-#ifndef cLFTibiaInv 
-#define cLFTibiaInv 0 
+#ifndef r1FemurInv 
+#define r1FemurInv 1 
 #endif
 
-#ifndef cRRTarsInv
-#define cRRTarsInv 1 
+#ifndef l4FemurInv 
+#define l4FemurInv 0 
 #endif
-#ifndef cRMTarsInv 
-#define cRMTarsInv 1 
+#ifndef l3FemurInv 
+#define l3FemurInv 0 
 #endif
-#ifndef cRFTarsInv 
-#define cRFTarsInv 1 
+#ifndef l2FemurInv 
+#define l2FemurInv 0 
+#endif
+#ifndef l1FemurInv 
+#define l1FemurInv 0 
 #endif
 
-#ifndef cLRTarsInv 
-#define cLRTarsInv 0 
+#ifndef r4TibiaInv 
+#define r4TibiaInv 1 
 #endif
-#ifndef cLMTarsInv 
-#define cLMTarsInv 0 
+#ifndef r3TibiaInv 
+#define r3TibiaInv 1 
 #endif
-#ifndef cLFTarsInv 
-#define cLFTarsInv 0 
+#ifndef r2TibiaInv 
+#define r2TibiaInv 1 
+#endif
+#ifndef r1TibiaInv 
+#define r1TibiaInv 1 
+#endif
+
+#ifndef l4TibiaInv 
+#define l4TibiaInv 0 
+#endif
+#ifndef l3TibiaInv 
+#define l3TibiaInv 0 
+#endif
+#ifndef l2TibiaInv 
+#define l2TibiaInv 0 
+#endif
+#ifndef l1TibiaInv 
+#define l1TibiaInv 0 
 #endif
 
 // Also define default BalanceDelay
@@ -199,43 +197,26 @@ static const short cTibiaHornOffset1[] PROGMEM = {
 #define CTIBIAHORNOFFSET1(LEGI)  (cTibiaHornOffset1)
 #endif
 
-#ifdef c4DOF
-#ifdef cRRTarsHornOffset1   // per leg configuration
-static const short cTarsHornOffset1[] PROGMEM = {
-  cRRTarsHornOffset1,  cRMTarsHornOffset1,  cRFTarsHornOffset1,  cLRTarsHornOffset1,  cLMTarsHornOffset1,  cLFTarsHornOffset1};
-#define CTARSHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTarsHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTarsHornOffset1
-#define cTarsHornOffset1  0
-#endif
-#define CTARSHORNOFFSET1(LEGI)  cTarsHornOffset1
-#endif
-#endif
-
 //Min / Max values
 #ifndef SERVOS_DO_MINMAX
 const short cCoxaMin1[] PROGMEM = {
-  cRRCoxaMin1,  cRMCoxaMin1,  cRFCoxaMin1,  cLRCoxaMin1,  cLMCoxaMin1,  cLFCoxaMin1};
+  r4CoxaMin1, r3CoxaMin1, r2CoxaMin1, r1CoxaMin1, l4CoxaMin1, l3CoxaMin1, l2CoxaMin1, l1CoxaMin1};
 const short cCoxaMax1[] PROGMEM = {
-  cRRCoxaMax1,  cRMCoxaMax1,  cRFCoxaMax1,  cLRCoxaMax1,  cLMCoxaMax1,  cLFCoxaMax1};
+  r4CoxaMax1, r3CoxaMax1, r2CoxaMax1, r1CoxaMax1,  l4CoxaMax1, l3CoxaMax1, l2CoxaMax1, l1CoxaMax1};
 const short cFemurMin1[] PROGMEM ={
-  cRRFemurMin1, cRMFemurMin1, cRFFemurMin1, cLRFemurMin1, cLMFemurMin1, cLFFemurMin1};
+  r4FemurMin1, r3FemurMin1, r2FemurMin1, r1FemurMin1, l4FemurMin1, l3FemurMin1, l2FemurMin1, l1FemurMin1};
 const short cFemurMax1[] PROGMEM ={
-  cRRFemurMax1, cRMFemurMax1, cRFFemurMax1, cLRFemurMax1, cLMFemurMax1, cLFFemurMax1};
+  r4FemurMax1, r3FemurMax1, r2FemurMax1, r1FemurMax1, l4FemurMax1, l3FemurMax1, l2FemurMax1, l1FemurMax1};
 const short cTibiaMin1[] PROGMEM ={
-  cRRTibiaMin1, cRMTibiaMin1, cRFTibiaMin1, cLRTibiaMin1, cLMTibiaMin1, cLFTibiaMin1};
+  r4TibiaMin1, r3TibiaMin1, r2TibiaMin1, r1TibiaMin1, l4TibiaMin1, l3TibiaMin1, l2TibiaMin1, l1TibiaMin1};
 const short cTibiaMax1[] PROGMEM = {
-  cRRTibiaMax1, cRMTibiaMax1, cRFTibiaMax1, cLRTibiaMax1, cLMTibiaMax1, cLFTibiaMax1};
+  r4TibiaMax1, r3TibiaMax1, r2TibiaMax1, r1TibiaMax1, l4TibiaMax1, l3TibiaMax1, l2TibiaMax1, l1TibiaMax1};
 #endif
 
 // Servo inverse direction
-const bool cCoxaInv[] = {cRRCoxaInv, cRMCoxaInv, cRFCoxaInv, cLRCoxaInv, cLMCoxaInv, cLFCoxaInv};
-bool cFemurInv[] = {cRRFemurInv, cRMFemurInv, cRFFemurInv, cLRFemurInv, cLMFemurInv, cLFFemurInv};
-const bool cTibiaInv[] = {cRRTibiaInv, cRMTibiaInv, cRFTibiaInv, cLRTibiaInv, cLMTibiaInv, cLFTibiaInv};
-
-#ifdef c4DOF
-const boolean cTarsInv[] = {cRRTarsInv, cRMTarsInv, cRFTarsInv, cLRTarsInv, cLMTarsInv, cLFTarsInv};
-#endif  
+const bool cCoxaInv[] = {r4CoxaInv, r3CoxaInv, r2CoxaInv, r1CoxaInv, l4CoxaInv, l3CoxaInv, l2CoxaInv, l1CoxaInv};
+bool cFemurInv[] = {r4FemurInv, r3FemurInv, r2FemurInv, r1FemurInv, l4FemurInv, l3FemurInv, l2FemurInv, l1FemurInv};
+const bool cTibiaInv[] = {r4TibiaInv, r3TibiaInv, r2TibiaInv, r1TibiaInv, l4TibiaInv, l3TibiaInv, l2TibiaInv, l1TibiaInv};
 
 //Leg Lengths
 const byte cCoxaLength[] PROGMEM = {
@@ -244,11 +225,6 @@ const byte cFemurLength[] PROGMEM = {
   cRRFemurLength, cRMFemurLength, cRFFemurLength, cLRFemurLength, cLMFemurLength, cLFFemurLength};
 const byte cTibiaLength[] PROGMEM = {
   cRRTibiaLength, cRMTibiaLength, cRFTibiaLength, cLRTibiaLength, cLMTibiaLength, cLFTibiaLength};
-#ifdef c4DOF
-const byte cTarsLength[] PROGMEM = {
-  cRRTarsLength, cRMTarsLength, cRFTarsLength, cLRTarsLength, cLMTarsLength, cLFTarsLength};
-#endif
-
 
 //Body Offsets [distance between the center of the body and the center of the coxa]
 const short cOffsetX[] PROGMEM = {
@@ -272,120 +248,6 @@ const short cInitPosY[] PROGMEM = {
   cRRInitPosY, cRMInitPosY, cRFInitPosY, cLRInitPosY, cLMInitPosY, cLFInitPosY};
 const short cInitPosZ[] PROGMEM = {
   cRRInitPosZ, cRMInitPosZ, cRFInitPosZ, cLRInitPosZ, cLMInitPosZ, cLFInitPosZ};
-
-//=============================================================================
-#else
-// Quads...
-// Servo Horn offsets
-#ifdef cRRFemurHornOffset1   // per leg configuration
-static const short cFemurHornOffset1[] PROGMEM = {
-  cRRFemurHornOffset1, cRFFemurHornOffset1, cLRFemurHornOffset1, cLFFemurHornOffset1};
-#define CFEMURHORNOFFSET1(LEGI) ((short)pgm_read_word(&cFemurHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cFemurHornOffset1
-#define cFemurHornOffset1  0
-#endif
-#define CFEMURHORNOFFSET1(LEGI)  (cFemurHornOffset1)
-#endif
-
-#ifdef cRRTibiaHornOffset1   // per leg configuration
-static const short cTibiaHornOffset1[] PROGMEM = {
-  cRRTibiaHornOffset1, cRFTibiaHornOffset1, cLRTibiaHornOffset1, cLFTibiaHornOffset1};
-#define CTIBIAHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTibiaHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTibiaHornOffset1
-#define cTibiaHornOffset1  0
-#endif
-#define CTIBIAHORNOFFSET1(LEGI)  (cTibiaHornOffset1)
-#endif
-
-
-
-#ifdef c4DOF
-#ifdef cRRTarsHornOffset1   // per leg configuration
-static const short cTarsHornOffset1[] PROGMEM = {
-  cRRTarsHornOffset1, cRFTarsHornOffset1,  cLRTarsHornOffset1, cLFTarsHornOffset1};
-#define CTARSHORNOFFSET1(LEGI) ((short)pgm_read_word(&cTarsHornOffset1[LEGI]))
-#else   // Fixed per leg, if not defined 0
-#ifndef cTarsHornOffset1
-#define cTarsHornOffset1  0
-#endif
-#define CTARSHORNOFFSET1(LEGI)  cTarsHornOffset1
-#endif
-#endif
-
-//Min / Max values
-#ifndef SERVOS_DO_MINMAX
-const short cCoxaMin1[] PROGMEM = {
-  cRRCoxaMin1,  cRFCoxaMin1,  cLRCoxaMin1,  cLFCoxaMin1};
-const short cCoxaMax1[] PROGMEM = {
-  cRRCoxaMax1,  cRFCoxaMax1,  cLRCoxaMax1,  cLFCoxaMax1};
-const short cFemurMin1[] PROGMEM ={
-  cRRFemurMin1, cRFFemurMin1, cLRFemurMin1, cLFFemurMin1};
-const short cFemurMax1[] PROGMEM ={
-  cRRFemurMax1, cRFFemurMax1, cLRFemurMax1, cLFFemurMax1};
-const short cTibiaMin1[] PROGMEM ={
-  cRRTibiaMin1, cRFTibiaMin1, cLRTibiaMin1, cLFTibiaMin1};
-const short cTibiaMax1[] PROGMEM = {
-  cRRTibiaMax1, cRFTibiaMax1, cLRTibiaMax1, cLFTibiaMax1};
-
-#ifdef c4DOF
-const short cTarsMin1[] PROGMEM = {
-  cRRTarsMin1, cRFTarsMin1, cLRTarsMin1, cLFTarsMin1};
-const short cTarsMax1[] PROGMEM = {
-  cRRTarsMax1, cRFTarsMax1, cLRTarsMax1, cLFTarsMax1};
-#endif
-#endif
-
-// Servo inverse direction
-const bool cCoxaInv[] = {cRRCoxaInv, cRFCoxaInv, cLRCoxaInv, cLFCoxaInv};
-bool cFemurInv[] = {cRRFemurInv, cRFFemurInv, cLRFemurInv, cLFFemurInv};
-const bool cTibiaInv[] = {cRRTibiaInv, cRFTibiaInv, cLRTibiaInv, cLFTibiaInv};
-
-#ifdef c4DOF
-const boolean cTarsInv[] = {
-    cRRTarsInv, cRFTarsInv, cLRTarsInv, cLFTarsInv};
-#endif  
-    
-
-
-//Leg Lengths
-const byte cCoxaLength[] PROGMEM = {
-  cRRCoxaLength,  cRFCoxaLength,  cLRCoxaLength,  cLFCoxaLength};
-const byte cFemurLength[] PROGMEM = {
-  cRRFemurLength, cRFFemurLength, cLRFemurLength, cLFFemurLength};
-const byte cTibiaLength[] PROGMEM = {
-  cRRTibiaLength, cRFTibiaLength, cLRTibiaLength, cLFTibiaLength};
-#ifdef c4DOF
-const byte cTarsLength[] PROGMEM = {
-  cRRTarsLength, cRFTarsLength, cLRTarsLength, cLFTarsLength};
-#endif
-
-
-//Body Offsets [distance between the center of the body and the center of the coxa]
-const short cOffsetX[] PROGMEM = {
-  cRROffsetX, cRFOffsetX, cLROffsetX, cLFOffsetX};
-const short cOffsetZ[] PROGMEM = {
-  cRROffsetZ, cRFOffsetZ, cLROffsetZ, cLFOffsetZ};
-
-//Default leg angle
-const short cCoxaAngle1[] PROGMEM = {
-  cRRCoxaAngle1, cRFCoxaAngle1, cLRCoxaAngle1, cLFCoxaAngle1};
-
-#ifdef cRRInitCoxaAngle1    // We can set different angles for the legs than just where they servo horns are set...
-const short cCoxaInitAngle1[] PROGMEM = {
-  cRRInitCoxaAngle1, cRFInitCoxaAngle1, cLRInitCoxaAngle1, cLFInitCoxaAngle1};
-#endif
-
-
-//Start positions for the leg
-const short cInitPosX[] PROGMEM = {
-  cRRInitPosX, cRFInitPosX, cLRInitPosX, cLFInitPosX};
-const short cInitPosY[] PROGMEM = {
-  cRRInitPosY, cRFInitPosY, cLRInitPosY, cLFInitPosY};
-const short cInitPosZ[] PROGMEM = {
-  cRRInitPosZ, cRFInitPosZ, cLRInitPosZ, cLFInitPosZ};
-
 #endif
 
 // Define some globals for debug information
@@ -401,9 +263,6 @@ boolean g_fEnableServos = true;
 short           CoxaAngle1[CNT_LEGS];    //Actual Angle of the horizontal hip, decimals = 1
 short           FemurAngle1[CNT_LEGS];   //Actual Angle of the vertical hip, decimals = 1
 short           TibiaAngle1[CNT_LEGS];   //Actual Angle of the knee, decimals = 1
-#ifdef c4DOF
-short           TarsAngle1[CNT_LEGS];     //Actual Angle of the knee, decimals = 1
-#endif
 
 //--------------------------------------------------------------------
 //[POSITIONS SINGLE LEG CONTROL]
@@ -985,18 +844,10 @@ void StartUpdateServos()
   g_ServoDriver.BeginServoUpdate();    // Start the update 
 
     for (LegIndex = 0; LegIndex < CNT_LEGS; LegIndex++) {
-#ifdef c4DOF
-    g_ServoDriver.OutputServoInfoForLeg(LegIndex, 
-        cCoxaInv[LegIndex]? -CoxaAngle1[LegIndex] : CoxaAngle1[LegIndex], 
-        cFemurInv[LegIndex]? -FemurAngle1[LegIndex] : FemurAngle1[LegIndex], 
-        cTibiaInv[LegIndex]? -TibiaAngle1[LegIndex] : TibiaAngle1[LegIndex], 
-        cTarsInv[LegIndex]? -TarsAngle1[LegIndex]) : TarsAngle1[LegIndex]);
-#else
     g_ServoDriver.OutputServoInfoForLeg(LegIndex, 
         cCoxaInv[LegIndex]? -CoxaAngle1[LegIndex] : CoxaAngle1[LegIndex], 
         cFemurInv[LegIndex]? -FemurAngle1[LegIndex] : FemurAngle1[LegIndex], 
         cTibiaInv[LegIndex]? -TibiaAngle1[LegIndex] : TibiaAngle1[LegIndex]);
-#endif      
   }
 #ifdef cTurretRotPin
   g_ServoDriver.OutputServoInfoForTurret(g_InControlState.TurretRotAngle1, g_InControlState.TurretTiltAngle1);  // fist just see if it will talk
@@ -1666,17 +1517,8 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
   unsigned long    IKA14;            //Angle of the line S>W with respect to the ground in radians, decimals = 4
   unsigned long    IKA24;            //Angle of the line S>W with respect to the femur in radians, decimals = 4
   short            IKFeetPosXZ;    //Diagonal direction from Input X and Z
-#ifdef c4DOF
-  // these were shorts...
-  long            TarsOffsetXZ;    //Vector value \ ;
-  long            TarsOffsetY;     //Vector value / The 2 DOF IK calcs (femur and tibia) are based upon these vectors
-  long            TarsToGroundAngle1;    //Angle between tars and ground. Note: the angle are 0 when the tars are perpendicular to the ground
-  long            TGA_A_H4;
-  long            TGA_B_H3;
-#else
 #define TarsOffsetXZ 0      // Vector value
 #define TarsOffsetY  0      //Vector value / The 2 DOF IK calcs (femur and tibia) are based upon these vectors
-#endif
 
 
   long            Temp1;            
@@ -1689,40 +1531,6 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
 
   //Length between the Coxa and tars [foot]
   IKFeetPosXZ = XYhyp2/c2DEC;
-#ifdef c4DOF
-  // Some legs may have the 4th DOF and some may not, so handle this here...
-  //Calc the TarsToGroundAngle1:
-  if ((byte)pgm_read_byte(&cTarsLength[LegIKLegNr])) {    // We allow mix of 3 and 4 DOF legs...
-    TarsToGroundAngle1 = -cTarsConst + cTarsMulti*IKFeetPosY + ((long)(IKFeetPosXZ*cTarsFactorA))/c1DEC - ((long)(IKFeetPosXZ*IKFeetPosY)/(cTarsFactorB));
-    if (IKFeetPosY < 0)     //Always compensate TarsToGroundAngle1 when IKFeetPosY it goes below zero
-      TarsToGroundAngle1 = TarsToGroundAngle1 - ((long)(IKFeetPosY*cTarsFactorC)/c1DEC);     //TGA base, overall rule
-    if (TarsToGroundAngle1 > 400)
-      TGA_B_H3 = 200 + (TarsToGroundAngle1/2);
-    else
-      TGA_B_H3 = TarsToGroundAngle1;
-
-    if (TarsToGroundAngle1 > 300)
-      TGA_A_H4 = 240 + (TarsToGroundAngle1/5);
-    else
-      TGA_A_H4 = TarsToGroundAngle1;
-
-    if (IKFeetPosY > 0)    //Only compensate the TarsToGroundAngle1 when it exceed 30 deg (A, H4 PEP note)
-      TarsToGroundAngle1 = TGA_A_H4;
-    else if (((IKFeetPosY <= 0) & (IKFeetPosY > -10))) // linear transition between case H3 and H4 (from PEP: H4-K5*(H3-H4))
-      TarsToGroundAngle1 = (TGA_A_H4 -(((long)IKFeetPosY*(TGA_B_H3-TGA_A_H4))/c1DEC));
-    else                //IKFeetPosY <= -10, Only compensate TGA1 when it exceed 40 deg
-    TarsToGroundAngle1 = TGA_B_H3;
-
-    //Calc Tars Offsets:
-    GetSinCos(TarsToGroundAngle1);
-    TarsOffsetXZ = ((long)sin4*(byte)pgm_read_byte(&cTarsLength[LegIKLegNr]))/c4DEC;
-    TarsOffsetY = ((long)cos4*(byte)pgm_read_byte(&cTarsLength[LegIKLegNr]))/c4DEC;
-  } 
-  else {
-    TarsOffsetXZ = 0;
-    TarsOffsetY = 0;
-  }
-#endif
 
   //Using GetAtan2 for solving IKA1 and IKSW
   //IKA14 - Angle between SW line and the ground in radians
@@ -1788,14 +1596,6 @@ void LegIK (short IKFeetPosX, short IKFeetPosY, short IKFeetPosZ, byte LegIKLegN
 #else  
     TibiaAngle1[LegIKLegNr] = -(900-(long)AngleRad4*180/3141 + CTIBIAHORNOFFSET1(LegIKLegNr));
 #endif
-#endif
-
-#ifdef c4DOF
-  //Tars angle
-  if ((byte)pgm_read_byte(&cTarsLength[LegIKLegNr])) {    // We allow mix of 3 and 4 DOF legs...
-    TarsAngle1[LegIKLegNr] = (TarsToGroundAngle1 + FemurAngle1[LegIKLegNr] - TibiaAngle1[LegIKLegNr]) 
-      + CTARSHORNOFFSET1(LegIKLegNr);
-  }
 #endif
 
   //Set the Solution quality    
@@ -1880,11 +1680,6 @@ void CheckAngles(void)
     CoxaAngle1[LegIndex]  = CheckServoAngleBounds(s++, CoxaAngle1[LegIndex], &cCoxaMin1[LegIndex], &cCoxaMax1[LegIndex]);
     FemurAngle1[LegIndex] = CheckServoAngleBounds(s++, FemurAngle1[LegIndex], &cFemurMin1[LegIndex], &cFemurMax1[LegIndex]);
     TibiaAngle1[LegIndex] = CheckServoAngleBounds(s++, TibiaAngle1[LegIndex], &cTibiaMin1[LegIndex], &cTibiaMax1[LegIndex]);
-#ifdef c4DOF
-    if ((byte)pgm_read_byte(&cTarsLength[LegIndex])) {    // We allow mix of 3 and 4 DOF legs...
-      TarsAngle1[LegIndex] = CheckServoAngleBounds(s++, TarsAngle1[LegIndex], &cTarsMin1[LegIndex], &cTarsMax1[LegIndex]);
-    }
-#endif
   }
 #endif  
 }
