@@ -780,7 +780,7 @@ boolean ServoDriver::ProcessTerminalCommand(byte *psz, byte bLen)
 
   if ((bLen == 1) && ((*psz == 't') || (*psz == 'T'))) {
     // Test to see if all servos are responding...
-    for(int i=1;i<=NUMSERVOS;i++){
+    for(int i=0;i<NUMSERVOS;i++){
       int iPos;
       iPos = ax12GetRegister(i,AX_PRESENT_POSITION_L,2);
       DBGSerial.print(i,DEC);

@@ -32,7 +32,7 @@
 #define c6DEC       1000000
 
 enum {
-  cRR=0, cRM, cRF, cLR, cLM, cLF, CNT_LEGS};
+  r4=0, r3, r2, r1, l4, l3, l2, l1, CNT_LEGS};
 
 #define WTIMERTICSPERMSMUL      64  // BAP28 is 16mhz need a multiplyer and divider to make the conversion with /8192
 #define WTIMERTICSPERMSDIV      125 // 
