@@ -4,17 +4,8 @@
 //====================================================================
 #include <Arduino.h> // Arduino 1.0
 
-#ifdef c4DOF
-#define NUMSERVOSPERLEG 4
-#else
 #define NUMSERVOSPERLEG 3
-#endif
-
-#ifdef cTurretRotPin
-#define NUMSERVOS (NUMSERVOSPERLEG*CNT_LEGS +2)
-#else
 #define NUMSERVOS (NUMSERVOSPERLEG*CNT_LEGS)
-#endif
 
 #define cPwmMult      128
 #define cPwmDiv       375  
@@ -56,15 +47,9 @@ word      g_awGoalAXPos[NUMSERVOS];
 // Global - Local to this file only...
 //=============================================================================
 static const byte cPinTable[] PROGMEM = {
-  cRRCoxaPin,  cRFCoxaPin,  cLRCoxaPin,  cLFCoxaPin, 
-  cRRFemurPin, cRFFemurPin, cLRFemurPin, cLFFemurPin,
-  cRRTibiaPin, cRFTibiaPin, cLRTibiaPin, cLFTibiaPin
-#ifdef c4DOF
- ,cRRTarsPin,  cRFTarsPin,  cLRTarsPin,  cLFTarsPin
-#endif
-#ifdef cTurretRotPin
-  , cTurretRotPin, cTurretTiltPin
-#endif
+  r4CoxaPin,  r1CoxaPin,  l4CoxaPin,  l1CoxaPin, 
+  r4FemurPin, r1FemurPin, l4FemurPin, l1FemurPin,
+  r4TibiaPin, r1TibiaPin, l4TibiaPin, l1TibiaPin
 };
 #endif
 #define FIRSTCOXAPIN     0

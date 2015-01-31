@@ -31,13 +31,8 @@
 #define c4DEC       10000
 #define c6DEC       1000000
 
-#ifdef QUADMODE
-enum {
-  cRR=0, cRF, cLR, cLF, CNT_LEGS};
-#else
 enum {
   cRR=0, cRM, cRF, cLR, cLM, cLF, CNT_LEGS};
-#endif
 
 #define WTIMERTICSPERMSMUL      64  // BAP28 is 16mhz need a multiplyer and divider to make the conversion with /8192
 #define WTIMERTICSPERMSDIV      125 // 
