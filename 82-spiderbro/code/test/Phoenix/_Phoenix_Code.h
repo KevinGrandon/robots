@@ -1,30 +1,3 @@
-//=============================================================================
-//Project Lynxmotion Phoenix
-//Description: Phoenix software
-//Software version: V2.0
-//Date: 29-10-2009
-//Programmer: Jeroen Janssen [aka Xan]
-//         Kurt Eckhardt(KurtE) converted to C and Arduino
-//   Kåre Halvorsen aka Zenta - Makes everything work correctly!     
-//
-// This version of the Phoenix code was ported over to the Arduino Environement
-// and is specifically configured for the Lynxmotion BotBoarduino 
-//
-// Phoenix_Code.h
-//
-//     This contains the main code for the Phoenix project.  It is included in
-//     all of the different configurations of the phoenix code.
-//
-//NEW IN V2.X
-//=============================================================================
-//
-//KNOWN BUGS:
-//    - Lots ;)
-//
-//=============================================================================
-// Header Files
-//=============================================================================
-
 #define DEFINE_HEX_GLOBALS
 #if ARDUINO>99
 #include <Arduino.h>
@@ -220,34 +193,34 @@ const bool cTibiaInv[] = {r4TibiaInv, r3TibiaInv, r2TibiaInv, r1TibiaInv, l4Tibi
 
 //Leg Lengths
 const byte cCoxaLength[] PROGMEM = {
-  cRRCoxaLength,  cRMCoxaLength,  cRFCoxaLength,  cLRCoxaLength,  cLMCoxaLength,  cLFCoxaLength};
+  r4CoxaLength, r3CoxaLength, r2CoxaLength, r1CoxaLength, l4CoxaLength, l3CoxaLength, l2CoxaLength, l1CoxaLength};
 const byte cFemurLength[] PROGMEM = {
-  cRRFemurLength, cRMFemurLength, cRFFemurLength, cLRFemurLength, cLMFemurLength, cLFFemurLength};
+  r4FemurLength, r3FemurLength, r2FemurLength, r1FemurLength, l4FemurLength, l3FemurLength, l2FemurLength, l1FemurLength};
 const byte cTibiaLength[] PROGMEM = {
-  cRRTibiaLength, cRMTibiaLength, cRFTibiaLength, cLRTibiaLength, cLMTibiaLength, cLFTibiaLength};
+  r4TibiaLength, r3TibiaLength, r2TibiaLength, r1TibiaLength, l4TibiaLength, l3TibiaLength, l2TibiaLength, l1TibiaLength};
 
 //Body Offsets [distance between the center of the body and the center of the coxa]
 const short cOffsetX[] PROGMEM = {
-  cRROffsetX, cRMOffsetX, cRFOffsetX, cLROffsetX, cLMOffsetX, cLFOffsetX};
+  r4OffsetX, r3OffsetX, r2OffsetX, r1OffsetX, l4OffsetX, l3OffsetX, l2OffsetX, l1OffsetX};
 const short cOffsetZ[] PROGMEM = {
-  cRROffsetZ, cRMOffsetZ, cRFOffsetZ, cLROffsetZ, cLMOffsetZ, cLFOffsetZ};
+  r4OffsetZ, r3OffsetZ, r2OffsetZ, r1OffsetZ, l4OffsetZ, l3OffsetZ, l2OffsetZ, l1OffsetZ};
 
 //Default leg angle
 const short cCoxaAngle1[] PROGMEM = {
-  cRRCoxaAngle1, cRMCoxaAngle1, cRFCoxaAngle1, cLRCoxaAngle1, cLMCoxaAngle1, cLFCoxaAngle1};
+  r4CoxaAngle1, r3CoxaAngle1, r2CoxaAngle1, r1CoxaAngle1, l4CoxaAngle1, l3CoxaAngle1, l2CoxaAngle1, l1CoxaAngle1};
 
-#ifdef cRRInitCoxaAngle1    // We can set different angles for the legs than just where they servo horns are set...
+#ifdef r4InitCoxaAngle1    // We can set different angles for the legs than just where they servo horns are set...
 const short cCoxaInitAngle1[] PROGMEM = {
-  cRRInitCoxaAngle1, cRMInitCoxaAngle1, cRFInitCoxaAngle1, cLRInitCoxaAngle1, cLMInitCoxaAngle1, cLFInitCoxaAngle1};
+  r4InitCoxaAngle1, r3InitCoxaAngle1, r2InitCoxaAngle1, r1InitCoxaAngle1, l4InitCoxaAngle1, l3InitCoxaAngle1, l2InitCoxaAngle1, l1InitCoxaAngle1};
 #endif
 
 //Start positions for the leg
 const short cInitPosX[] PROGMEM = {
-  cRRInitPosX, cRMInitPosX, cRFInitPosX, cLRInitPosX, cLMInitPosX, cLFInitPosX};
+  r4InitPosX, r3InitPosX, r2InitPosX, r1InitPosX, l4InitPosX, l3InitPosX, l2InitPosX, l1InitPosX};
 const short cInitPosY[] PROGMEM = {
-  cRRInitPosY, cRMInitPosY, cRFInitPosY, cLRInitPosY, cLMInitPosY, cLFInitPosY};
+  r4InitPosY, r3InitPosY, r2InitPosY, r1InitPosY, l4InitPosY, l3InitPosY, l2InitPosY, l1InitPosY};
 const short cInitPosZ[] PROGMEM = {
-  cRRInitPosZ, cRMInitPosZ, cRFInitPosZ, cLRInitPosZ, cLMInitPosZ, cLFInitPosZ};
+  r4InitPosZ, r3InitPosZ, r2InitPosZ, r1InitPosZ, l4InitPosZ, l3InitPosZ, l2InitPosZ, l1InitPosZ};
 #endif
 
 // Define some globals for debug information

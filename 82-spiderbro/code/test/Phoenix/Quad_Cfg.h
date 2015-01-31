@@ -4,9 +4,6 @@
 //    This is the hardware configuration file for the 
 //    Version 2 PhantomX Quad robot.
 //    Will first define to use their commander unit.
-//
-//Date: June 29, 2013
-//
 //====================================================================
 #ifndef QUAD_CFG_H
 #define QUAD_CFG_H

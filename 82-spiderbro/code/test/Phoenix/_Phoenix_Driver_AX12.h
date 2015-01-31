@@ -1,6 +1,4 @@
 //====================================================================
-//Project Lynxmotion Phoenix
-//
 // Servo Driver - This version is setup to use AX-12 type servos using the
 // Arbotix AX12 and bioloid libraries (which may have been updated)
 //====================================================================

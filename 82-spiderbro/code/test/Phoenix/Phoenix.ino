@@ -1,13 +1,8 @@
-
 // Warning setup to build for standard hexapod or for quad.
 //=============================================================================
 // Warning:: This configuration does not check voltages, so you should be careful to
 // not allow the lipo to discharge too far. 
 //
-//=============================================================================
-// Header Files
-//=============================================================================
-
 #define DEFINE_HEX_GLOBALS
 #include <Arduino.h>
 #include <EEPROM.h>
