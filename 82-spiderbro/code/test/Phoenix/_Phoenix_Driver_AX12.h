@@ -51,16 +51,11 @@ static const byte cPinTable[] PROGMEM = {
   r4FemurPin, r1FemurPin, l4FemurPin, l1FemurPin,
   r4TibiaPin, r1TibiaPin, l4TibiaPin, l1TibiaPin
 };
-#endif
+
 #define FIRSTCOXAPIN     0
 #define FIRSTFEMURPIN    (CNT_LEGS)
 #define FIRSTTIBIAPIN    (CNT_LEGS*2)
-#ifdef c4DOF
-#define FIRSTTARSPIN     (CNT_LEGS*3)
-#define FIRSTTURRETPIN   (CNT_LEGS*4)
-#else
 #define FIRSTTURRETPIN   (CNT_LEGS*3)
-#endif
 // Not sure yet if I will use the controller class or not, but...
 BioloidControllerEx bioloid = BioloidControllerEx(1000000);
 boolean g_fServosFree;    // Are the servos in a free state?
