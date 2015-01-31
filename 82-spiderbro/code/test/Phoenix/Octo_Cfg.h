@@ -302,35 +302,33 @@
 #define l3CoxaAngle1      0
 #define l4CoxaAngle1   -450
 
-// TODO:::::::::
-// Still need to define distances here.
-#define X_COXA           60  // MM between front and back legs /2
-#define Y_COXA           60  // MM between front/back legs /2
-#define M_COXA          100  // MM between two middle legs /2
+#define X_COXA          180    // MM between front and back legs /2
+#define Y_COXA          180    // MM between front/back legs /2
+#define M_COXA          100    // MM between two middle legs /2
 
-#define r1OffsetX      -60     //Distance X from center of the body to the Right Front coxa
-#define r1OffsetZ      -120    //Distance Z from center of the body to the Right Front coxa
+#define r1OffsetX       -60    //Distance X from center of the body to the Right Front coxa
+#define r1OffsetZ      -180    //Distance Z from center of the body to the Right Front coxa
 
 #define r2OffsetX      -100    //Distance X from center of the body to the Right Middle Front coxa
-#define r2OffsetZ      0       //Distance Z from center of the body to the Right Middle Front coxa
+#define r2OffsetZ       -60    //Distance Z from center of the body to the Right Middle Front coxa
 
 #define r3OffsetX      -100    //Distance X from center of the body to the Right Middle Rear coxa
-#define r3OffsetZ      0       //Distance Z from center of the body to the Right Middle Rear coxa
+#define r3OffsetZ        60    //Distance Z from center of the body to the Right Middle Rear coxa
 
-#define r4OffsetX      -60     //Distance X from center of the body to the Right Rear coxa
-#define r4OffsetZ      120     //Distance Z from center of the body to the Right Rear coxa
+#define r4OffsetX       -60    //Distance X from center of the body to the Right Rear coxa
+#define r4OffsetZ       180    //Distance Z from center of the body to the Right Rear coxa
 
-#define l1OffsetX      60      //Distance X from center of the body to the Left Front coxa
-#define l1OffsetZ      -120    //Distance Z from center of the body to the Left Front coxa
+#define l1OffsetX        60    //Distance X from center of the body to the Left Front coxa
+#define l1OffsetZ      -180    //Distance Z from center of the body to the Left Front coxa
 
-#define l2OffsetX      100     //Distance X from center of the body to the Left Middle coxa
-#define l2OffsetZ      0       //Distance Z from center of the body to the Left Middle coxa
+#define l2OffsetX       100    //Distance X from center of the body to the Left Middle Front coxa
+#define l2OffsetZ       -60    //Distance Z from center of the body to the Left Middle Front coxa
 
-#define l3OffsetX      100     //Distance X from center of the body to the Left Middle coxa
-#define l3OffsetZ      0       //Distance Z from center of the body to the Left Middle coxa
+#define l3OffsetX       100    //Distance X from center of the body to the Left Middle Rear coxa
+#define l3OffsetZ        60    //Distance Z from center of the body to the Left Middle Rear coxa
 
-#define l4OffsetX      60      //Distance X from center of the body to the Left Rear coxa
-#define l4OffsetZ      120     //Distance Z from center of the body to the Left Rear coxa
+#define l4OffsetX        60    //Distance X from center of the body to the Left Rear coxa
+#define l4OffsetZ       180    //Distance Z from center of the body to the Left Rear coxa
 
 
 //--------------------------------------------------------------------
