@@ -14,13 +14,7 @@
 // Global defines to control which configuration we are using.  Note: Only define one of these...
 // 
 // Which type of control(s) do you want to compile in
-#if defined(__MK20DX256__)
 #define DBGSerial         Serial
-#else
-#if defined(UBRR2H)
-#define DBGSerial         Serial
-#endif
-#endif 
 
 // Define other optional compnents to be included or not...
 //#define PHANTOMX_V2     // Some code may depend on it being a V2 PhantomX
@@ -58,7 +52,7 @@
 #define OPT_BACKGROUND_PROCESS    // The AX12 has a background process
 //#define OPT_GPPLAYER
 //#define OPT_SINGLELEG
-#define OPT_DYNAMIC_ADJUST_LEGS
+//#define OPT_DYNAMIC_ADJUST_LEGS
 //#define ADJUSTABLE_LEG_ANGLES
 
 
@@ -96,14 +90,6 @@
 #define PS2_CLK      A3
 
 // Define Analog pin and minimum voltage that we will allow the servos to run
-#if defined(__MK20DX256__)
-// Our Teensy board
-#define cVoltagePin  0
-
-#define CVADR1      402  // VD Resistor 1 - reduced as only need ratio... 40.2K and 10K
-#define CVADR2      100    // VD Resistor 2
-#define CVREF       330    // 3.3v
-#endif
 //#define cVoltagePin  7      // Use our Analog pin jumper here...
 //#define CVADR1      1000  // VD Resistor 1 - reduced as only need ratio... 20K and 4.66K
 //#define CVADR2      233   // VD Resistor 2

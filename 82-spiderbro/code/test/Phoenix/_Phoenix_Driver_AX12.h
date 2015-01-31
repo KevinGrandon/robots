@@ -154,12 +154,7 @@ word ServoDriver::GetBatteryVoltage(void) {
   g_wVoltageSum -= g_awVoltages[g_iVoltages];
   g_awVoltages[g_iVoltages] = analogRead(cVoltagePin);
   g_wVoltageSum += g_awVoltages[g_iVoltages];
-
-#ifdef CVREF
-  return ((long)((long)g_wVoltageSum*CVREF*(CVADR1+CVADR2))/(long)(8192*(long)CVADR2));  
-#else
   return ((long)((long)g_wVoltageSum*125*(CVADR1+CVADR2))/(long)(2048*(long)CVADR2));  
-#endif
 }
 
 #else
@@ -779,9 +774,6 @@ boolean ServoDriver::ProcessTerminalCommand(byte *psz, byte bLen)
   if ((bLen == 1) && ((*psz == 'v') || (*psz == 'V'))) {
     DBGSerial.print(F("Voltage: "));
     DBGSerial.println(GetBatteryVoltage(), DEC);
-    DBGSerial.print("Raw Analog: ");
-    DBGSerial.println(analogRead(cVoltagePin));
-
     DBGSerial.print(F("From Servo 2: "));
     DBGSerial.println(ax12GetRegister (2, AX_PRESENT_VOLTAGE, 1), DEC);    
   }

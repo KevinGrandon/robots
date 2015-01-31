@@ -856,7 +856,7 @@ boolean CheckVoltage() {
 
   if (!g_fLowVoltageShutdown) {
     if ((Voltage < cTurnOffVol) || (Voltage >= 1999)) {
-#ifdef DBGSerial          
+#ifdef DBGSerial
       DBGSerial.print("Voltage went low, turn off robot ");
       DBGSerial.println(Voltage, DEC);
 #endif            
@@ -1958,7 +1958,7 @@ boolean TerminalMonitor(void)
     DBGSerial.println(F("G ST NL RR RF LR LF"));
 #endif
 #ifdef OPT_DYNAMIC_ADJUST_LEGS
-    DBGSerial.println(F("I pos ang"));
+    DBGSerial.println(F("I - pos ang"));
 #endif
 #ifdef OPT_TERMINAL_MONITOR_IC    // Allow the input controller to define stuff as well
     g_InputController.ShowTerminalCommandList(); 
