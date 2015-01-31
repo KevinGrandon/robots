@@ -210,25 +210,41 @@
 //--------------------------------------------------------------------
 //[LEG DIMENSIONS]
 //Universal dimensions for each leg in mm
-#define cXXCoxaLength     52    // PhantomX leg dimensions.
-#define cXXFemurLength    65
-#define cXXTibiaLength    133
+#define defaultCoxaLength     52    // PhantomX leg dimensions.
+#define defaultFemurLength    65
+#define defaultTibiaLength    133
 
-#define cRRCoxaLength     cXXCoxaLength	    //Right Rear leg
-#define cRRFemurLength    cXXFemurLength
-#define cRRTibiaLength    cXXTibiaLength
+#define r1CoxaLength     defaultCoxaLength
+#define r1FemurLength    defaultFemurLength
+#define r1TibiaLength    defaultTibiaLength
 
-#define cRFCoxaLength     cXXCoxaLength	    //Rigth front leg
-#define cRFFemurLength    cXXFemurLength
-#define cRFTibiaLength    cXXTibiaLength
+#define r2CoxaLength     defaultCoxaLength
+#define r2FemurLength    defaultFemurLength
+#define r2TibiaLength    defaultTibiaLength
 
-#define cLRCoxaLength     cXXCoxaLength	    //Left Rear leg
-#define cLRFemurLength    cXXFemurLength
-#define cLRTibiaLength    cXXTibiaLength
+#define r3CoxaLength     defaultCoxaLength
+#define r3FemurLength    defaultFemurLength
+#define r3TibiaLength    defaultTibiaLength
 
-#define cLFCoxaLength     cXXCoxaLength	    //Left front leg
-#define cLFFemurLength    cXXFemurLength
-#define cLFTibiaLength    cXXTibiaLength
+#define r4CoxaLength     defaultCoxaLength
+#define r4FemurLength    defaultFemurLength
+#define r4TibiaLength    defaultTibiaLength
+
+#define l1CoxaLength     defaultCoxaLength
+#define l1FemurLength    defaultFemurLength
+#define l1TibiaLength    defaultTibiaLength
+
+#define l2CoxaLength     defaultCoxaLength
+#define l2FemurLength    defaultFemurLength
+#define l2TibiaLength    defaultTibiaLength
+
+#define l3CoxaLength     defaultCoxaLength
+#define l3FemurLength    defaultFemurLength
+#define l3TibiaLength    defaultTibiaLength
+
+#define l4CoxaLength     defaultCoxaLength
+#define l4FemurLength    defaultFemurLength
+#define l4TibiaLength    defaultTibiaLength
 
 //--------------------------------------------------------------------
 //[BODY DIMENSIONS]
