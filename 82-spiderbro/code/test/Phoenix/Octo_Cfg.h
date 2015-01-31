@@ -124,22 +124,37 @@
 //--------------------------------------------------------------------
 // Define which pins(sevo IDS go with which joint
 
-#define cRRCoxaPin      8    //Rear Right leg Hip Horizontal
-#define cRRFemurPin     10   //Rear Right leg Hip Vertical
-#define cRRTibiaPin     12   //Rear Right leg Knee
+#define r1CoxaPin      0    //Front Right leg Hip Horizontal
+#define r1FemurPin     8    //Front Right leg Hip Vertical
+#define r1TibiaPin     16   //Front Right leg Knee
 
-#define cRFCoxaPin      2    //Front Right leg Hip Horizontal
-#define cRFFemurPin     4    //Front Right leg Hip Vertical
-#define cRFTibiaPin     6    //Front Right leg Knee
+#define r2CoxaPin      1    //Front Mid Right leg Hip Horizontal
+#define r2FemurPin     9    //Front Mid Right leg Hip Vertical
+#define r2TibiaPin     17   //Front Mid Right leg Knee
 
-#define cLRCoxaPin      7    //Rear Left leg Hip Horizontal
-#define cLRFemurPin     9    //Rear Left leg Hip Vertical
-#define cLRTibiaPin     11   //Rear Left leg Knee
+#define r3CoxaPin      2    //Rear Mid Right leg Hip Horizontal
+#define r3FemurPin     10   //Rear Mid Right leg Hip Vertical
+#define r3TibiaPin     18   //Rear Mid Right leg Knee
 
-#define cLFCoxaPin      1    //Front Left leg Hip Horizontal
-#define cLFFemurPin     3    //Front Left leg Hip Vertical
-#define cLFTibiaPin     5    //Front Left leg Knee
+#define r4CoxaPin      3    //Rear Right leg Hip Horizontal
+#define r4FemurPin     11   //Rear Right leg Hip Vertical
+#define r4TibiaPin     19   //Rear Right leg Knee
 
+#define l1CoxaPin      7    //Front Left leg Hip Horizontal
+#define l1FemurPin     15   //Front Left leg Hip Vertical
+#define l1TibiaPin     23   //Front Left leg Knee
+
+#define l2CoxaPin      6    //Front Mid Left leg Hip Horizontal
+#define l2FemurPin     14   //Front Mid Left leg Hip Vertical
+#define l2TibiaPin     22   //Front Mid Left leg Knee
+
+#define l3CoxaPin      5    //Rear Mid Left leg Hip Horizontal
+#define l3FemurPin     13   //Rear Mid Left leg Hip Vertical
+#define l3TibiaPin     21   //Rear Mid Left leg Knee
+
+#define l4CoxaPin      4    //Rear Left leg Hip Horizontal
+#define l4FemurPin     12   //Rear Left leg Hip Vertical
+#define l4TibiaPin     20   //Rear Left leg Knee
 
 //--------------------------------------------------------------------
 //[MIN/MAX ANGLES] - Warning - remember that some servos direction is 
