@@ -26,12 +26,14 @@
 //#define PHANTOMX_V2     // Some code may depend on it being a V2 PhantomX
 #define cFemurHornOffset1 -35 // -70
 #define cTibiaHornOffset1 463 //380
-#define cRRTibiaInv 0 
-#define cRMTibiaInv 0 
-#define cRFTibiaInv 0 
-#define cLRTibiaInv 1 
-#define cLMTibiaInv 1 
-#define cLFTibiaInv 1 
+#define r4TibiaInv 0 
+#define r3TibiaInv 0 
+#define r2TibiaInv 0 
+#define r1TibiaInv 0 
+#define l4TibiaInv 1 
+#define l3TibiaInv 1 
+#define l2TibiaInv 1 
+#define l1TibiaInv 1 
 
 #define BALANCE_DELAY 25    // don't add as much as the default here.
 
