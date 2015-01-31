@@ -123,38 +123,52 @@
 
 //--------------------------------------------------------------------
 // Define which pins(sevo IDS go with which joint
+// Joints are defined from front to rear (1 to 4)
+// and as if you are the robot, and looking out of its eyes.
 
-#define r1CoxaPin      0    //Front Right leg Hip Horizontal
-#define r1FemurPin     8    //Front Right leg Hip Vertical
-#define r1TibiaPin     16   //Front Right leg Knee
+//         * FRONT *
+//         L1    R1
+//          |    |
+//           \  /
+//     L2 ----/\---- R2
+//           |  |
+//     L3 ----\/---- R3
+//           /  \
+//          |    |
+//         L4     R4
+//      * POWER SWITCH *
 
-#define r2CoxaPin      1    //Front Mid Right leg Hip Horizontal
-#define r2FemurPin     9    //Front Mid Right leg Hip Vertical
-#define r2TibiaPin     17   //Front Mid Right leg Knee
+#define l1CoxaPin      0    //Front Right leg Hip Horizontal
+#define l1FemurPin     8    //Front Right leg Hip Vertical
+#define l1TibiaPin     16   //Front Right leg Knee
 
-#define r3CoxaPin      2    //Rear Mid Right leg Hip Horizontal
-#define r3FemurPin     10   //Rear Mid Right leg Hip Vertical
-#define r3TibiaPin     18   //Rear Mid Right leg Knee
+#define l2CoxaPin      1    //Front Mid Right leg Hip Horizontal
+#define l2FemurPin     9    //Front Mid Right leg Hip Vertical
+#define l2TibiaPin     17   //Front Mid Right leg Knee
 
-#define r4CoxaPin      3    //Rear Right leg Hip Horizontal
-#define r4FemurPin     11   //Rear Right leg Hip Vertical
-#define r4TibiaPin     19   //Rear Right leg Knee
+#define l3CoxaPin      2    //Rear Mid Right leg Hip Horizontal
+#define l3FemurPin     10   //Rear Mid Right leg Hip Vertical
+#define l3TibiaPin     18   //Rear Mid Right leg Knee
 
-#define l1CoxaPin      7    //Front Left leg Hip Horizontal
-#define l1FemurPin     15   //Front Left leg Hip Vertical
-#define l1TibiaPin     23   //Front Left leg Knee
+#define l4CoxaPin      3    //Rear Right leg Hip Horizontal
+#define l4FemurPin     11   //Rear Right leg Hip Vertical
+#define l4TibiaPin     19   //Rear Right leg Knee
 
-#define l2CoxaPin      6    //Front Mid Left leg Hip Horizontal
-#define l2FemurPin     14   //Front Mid Left leg Hip Vertical
-#define l2TibiaPin     22   //Front Mid Left leg Knee
+#define r1CoxaPin      7    //Front Left leg Hip Horizontal
+#define r1FemurPin     15   //Front Left leg Hip Vertical
+#define r1TibiaPin     23   //Front Left leg Knee
 
-#define l3CoxaPin      5    //Rear Mid Left leg Hip Horizontal
-#define l3FemurPin     13   //Rear Mid Left leg Hip Vertical
-#define l3TibiaPin     21   //Rear Mid Left leg Knee
+#define r2CoxaPin      6    //Front Mid Left leg Hip Horizontal
+#define r2FemurPin     14   //Front Mid Left leg Hip Vertical
+#define r2TibiaPin     22   //Front Mid Left leg Knee
 
-#define l4CoxaPin      4    //Rear Left leg Hip Horizontal
-#define l4FemurPin     12   //Rear Left leg Hip Vertical
-#define l4TibiaPin     20   //Rear Left leg Knee
+#define r3CoxaPin      5    //Rear Mid Left leg Hip Horizontal
+#define r3FemurPin     13   //Rear Mid Left leg Hip Vertical
+#define r3TibiaPin     21   //Rear Mid Left leg Knee
+
+#define r4CoxaPin      4    //Rear Left leg Hip Horizontal
+#define r4FemurPin     12   //Rear Left leg Hip Vertical
+#define r4TibiaPin     20   //Rear Left leg Knee
 
 //--------------------------------------------------------------------
 //[MIN/MAX ANGLES] - Warning - remember that some servos direction is 
@@ -173,33 +187,62 @@
 //8:220(-855) 801(846)
 //10:255(-752) 861(1022)
 //12:125(-1133) 746(685)
-#define cRRCoxaMin1    -750
-#define cRRCoxaMax1    750
-#define cRRFemurMin1    -1000
-#define cRRFemurMax1    1000
-#define cRRTibiaMin1    -1020
-#define cRRTibiaMax1    680
+#define r1CoxaMin1     -750
+#define r1CoxaMax1      750
+#define r1FemurMin1   -1000
+#define r1FemurMax1    1000
+#define r1TibiaMin1   -1020
+#define r1TibiaMax1     670
 
-#define cRFCoxaMin1    -750    //Mechanical limits of the Right Front Leg, decimals = 1
-#define cRFCoxaMax1     750
-#define cRFFemurMin1    -1000
-#define cRFFemurMax1    1000
-#define cRFTibiaMin1    -1020
-#define cRFTibiaMax1    680
+#define r2CoxaMin1      -750
+#define r2CoxaMax1       750
+#define r2FemurMin1    -1000
+#define r2FemurMax1     1000
+#define r2TibiaMin1    -1020
+#define r2TibiaMax1      670
 
-#define cLRCoxaMin1    -750    //Mechanical limits of the Left Rear Leg, decimals = 1
-#define cLRCoxaMax1     750
-#define cLRFemurMin1     -1000
-#define cLRFemurMax1     1000
-#define cLRTibiaMin1    -1020
-#define cLRTibiaMax1     680
+#define r3CoxaMin1      -750
+#define r3CoxaMax1       750
+#define r3FemurMin1    -1000
+#define r3FemurMax1     1000
+#define r3TibiaMin1    -1020
+#define r3TibiaMax1      670
 
-#define cLFCoxaMin1     -750    //Mechanical limits of the Left Front Leg, decimals = 1
-#define cLFCoxaMax1     750
-#define cLFFemurMin1     -1000
-#define cLFFemurMax1     1000
-#define cLFTibiaMin1    -1020
-#define cLFTibiaMax1     680
+#define r4CoxaMin1      -750
+#define r4CoxaMax1       750
+#define r4FemurMin1    -1000
+#define r4FemurMax1     1000
+#define r4TibiaMin1    -1020
+#define r4TibiaMax1      670
+
+#define l1CoxaMin1     -750
+#define l1CoxaMax1      750
+#define l1FemurMin1   -1000
+#define l1FemurMax1    1000
+#define l1TibiaMin1   -1020
+#define l1TibiaMax1     670
+
+#define l2CoxaMin1      -750
+#define l2CoxaMax1       750
+#define l2FemurMin1    -1000
+#define l2FemurMax1     1000
+#define l2TibiaMin1    -1020
+#define l2TibiaMax1      670
+
+#define l3CoxaMin1      -750
+#define l3CoxaMax1       750
+#define l3FemurMin1    -1000
+#define l3FemurMax1     1000
+#define l3TibiaMin1    -1020
+#define l3TibiaMax1      670
+
+#define l4CoxaMin1      -750
+#define l4CoxaMax1       750
+#define l4FemurMin1    -1000
+#define l4FemurMax1     1000
+#define l4TibiaMin1    -1020
+#define l4TibiaMax1      670
+
 
 //--------------------------------------------------------------------
 //[Joint offsets]
