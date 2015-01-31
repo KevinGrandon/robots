@@ -291,69 +291,98 @@
 
 //--------------------------------------------------------------------
 //[BODY DIMENSIONS]
-#define cRRCoxaAngle1   -450   //Default Coxa setup angle, decimals = 1
-#define cRFCoxaAngle1    450    //Default Coxa setup angle, decimals = 1
-#define cLRCoxaAngle1    -450   //Default Coxa setup angle, decimals = 1
-#define cLFCoxaAngle1    450    //Default Coxa setup angle, decimals = 1
+//Default Coxa setup angle, decimals = 1
+#define r1CoxaAngle1    450
+#define r2CoxaAngle1      0
+#define r3CoxaAngle1      0
+#define r4CoxaAngle1   -450
 
-#define X_COXA          65      // MM between front and back legs /2
-#define Y_COXA          65      // MM between front/back legs /2
+#define l1CoxaAngle1    450
+#define l2CoxaAngle1      0
+#define l3CoxaAngle1      0
+#define l4CoxaAngle1   -450
 
-#define cRROffsetX      -X_COXA     //Distance X from center of the body to the Right Rear coxa
-#define cRROffsetZ      Y_COXA     //Distance Z from center of the body to the Right Rear coxa
+// TODO:::::::::
+// Still need to define distances here.
+#define X_COXA           60  // MM between front and back legs /2
+#define Y_COXA           60  // MM between front/back legs /2
+#define M_COXA          100  // MM between two middle legs /2
 
-#define cRFOffsetX      -X_COXA     //Distance X from center of the body to the Right Front coxa
-#define cRFOffsetZ      -Y_COXA    //Distance Z from center of the body to the Right Front coxa
+#define r1OffsetX      -60     //Distance X from center of the body to the Right Front coxa
+#define r1OffsetZ      -120    //Distance Z from center of the body to the Right Front coxa
 
-#define cLROffsetX      X_COXA      //Distance X from center of the body to the Left Rear coxa
-#define cLROffsetZ      Y_COXA     //Distance Z from center of the body to the Left Rear coxa
+#define r2OffsetX      -100    //Distance X from center of the body to the Right Middle Front coxa
+#define r2OffsetZ      0       //Distance Z from center of the body to the Right Middle Front coxa
 
-#define cLFOffsetX      X_COXA      //Distance X from center of the body to the Left Front coxa
-#define cLFOffsetZ      -Y_COXA    //Distance Z from center of the body to the Left Front coxa
+#define r3OffsetX      -100    //Distance X from center of the body to the Right Middle Rear coxa
+#define r3OffsetZ      0       //Distance Z from center of the body to the Right Middle Rear coxa
+
+#define r4OffsetX      -60     //Distance X from center of the body to the Right Rear coxa
+#define r4OffsetZ      120     //Distance Z from center of the body to the Right Rear coxa
+
+#define l1OffsetX      60      //Distance X from center of the body to the Left Front coxa
+#define l1OffsetZ      -120    //Distance Z from center of the body to the Left Front coxa
+
+#define l2OffsetX      100     //Distance X from center of the body to the Left Middle coxa
+#define l2OffsetZ      0       //Distance Z from center of the body to the Left Middle coxa
+
+#define l3OffsetX      100     //Distance X from center of the body to the Left Middle coxa
+#define l3OffsetZ      0       //Distance Z from center of the body to the Left Middle coxa
+
+#define l4OffsetX      60      //Distance X from center of the body to the Left Rear coxa
+#define l4OffsetZ      120     //Distance Z from center of the body to the Left Rear coxa
+
 
 //--------------------------------------------------------------------
 //[START POSITIONS FEET]
-#define cHexInitXZ	 150
-#define CHexInitXZCos60  130 //92      // COS(60) = .866
-#define CHexInitXZSin60  75 // 92     // sin(60) = .5
-#define CHexInitY	 25       //30
+#define cHexInitXZ	 147
+#define CHexInitXZCos60  104        // COS(45) = .707
+#define CHexInitXZSin60  104    // sin(45) = .707
+#define CHexInitY	 25 //30
 
 // Lets try some multi leg positions depending on height settings.
-#define DYNAMIC_INIT_XZ 
-#define CNT_HEX_INITS   3
-#define MAX_BODY_Y    150
-
-// For Inits we may want to tell system actual angles we are initiing servos to...
-// In some cases like some quads may not want legs straight out...
-#define cRRInitCoxaAngle1   -300   //Default Coxa setup angle, decimals = 1
-#define cRFInitCoxaAngle1    300    //Default Coxa setup angle, decimals = 1
-#define cLRInitCoxaAngle1    -300   //Default Coxa setup angle, decimals = 1
-#define cLFInitCoxaAngle1    300    //Default Coxa setup angle, decimals = 1
-
-
+#define CNT_HEX_INITS 2
+#define MAX_BODY_Y  150
 #ifdef DEFINE_HEX_GLOBALS
-const byte g_abHexIntXZ[] PROGMEM = {cHexInitXZ, 130, 110};
-const byte g_abHexMaxBodyY[] PROGMEM = { 30, 60, MAX_BODY_Y};
+const byte g_abHexIntXZ[] PROGMEM = {cHexInitXZ, 144};
+const byte g_abHexMaxBodyY[] PROGMEM = { 20, MAX_BODY_Y};
 #else
 extern const byte g_abHexIntXZ[] PROGMEM;
 extern const byte g_abHexMaxBodyY[] PROGMEM;
 #endif
 
-#define cRRInitPosX     CHexInitXZCos60      //Start positions of the Right Rear leg
-#define cRRInitPosY     CHexInitY
-#define cRRInitPosZ     CHexInitXZSin60
+#define r1InitPosX     CHexInitXZCos60      //Start positions of the Right Front leg
+#define r1InitPosY     CHexInitY
+#define r1InitPosZ     -CHexInitXZSin60
 
-#define cRFInitPosX     CHexInitXZCos60      //Start positions of the Right Front leg
-#define cRFInitPosY     CHexInitY
-#define cRFInitPosZ     -CHexInitXZSin60
+#define r2InitPosX     cHexInitXZ      //Start positions of the Right Middle leg
+#define r2InitPosY     CHexInitY
+#define r2InitPosZ     0
 
-#define cLRInitPosX     CHexInitXZCos60      //Start positions of the Left Rear leg
-#define cLRInitPosY     CHexInitY
-#define cLRInitPosZ     CHexInitXZSin60
+#define r3InitPosX     cHexInitXZ      //Start positions of the Right Middle leg
+#define r3InitPosY     CHexInitY
+#define r3InitPosZ     0
 
-#define cLFInitPosX     CHexInitXZCos60      //Start positions of the Left Front leg
-#define cLFInitPosY     CHexInitY
-#define cLFInitPosZ     -CHexInitXZSin60
+#define r4InitPosX     CHexInitXZCos60      //Start positions of the Right Rear leg
+#define r4InitPosY     CHexInitY
+#define r4InitPosZ     CHexInitXZSin60
+
+#define l1InitPosX     CHexInitXZCos60      //Start positions of the Left Front leg
+#define l1InitPosY     CHexInitY
+#define l1InitPosZ     -CHexInitXZSin60
+
+#define l2InitPosX     cHexInitXZ      //Start positions of the Left Middle leg
+#define l2InitPosY     CHexInitY
+#define l2InitPosZ     0
+
+#define l3InitPosX     cHexInitXZ      //Start positions of the Left Middle leg
+#define l3InitPosY     CHexInitY
+#define l3InitPosZ     0
+
+#define l4InitPosX     CHexInitXZCos60      //Start positions of the Left Rear leg
+#define l4InitPosY     CHexInitY
+#define l4InitPosZ     CHexInitXZSin60
+
 //--------------------------------------------------------------------
 #endif // HEX_CFG_H
 
