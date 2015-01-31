@@ -4,7 +4,7 @@
 
 BioloidController bioloid = BioloidController(1000000);
 
-const int SERVOCOUNT = 1;
+const int SERVOCOUNT = 24;
 int id;
 int pos;
 boolean IDCheck;
@@ -27,12 +27,12 @@ void setup(){
   CheckVoltage();
   //Scan Servos, return position.
   
-  MoveCenter();
+  //MoveCenter();
   ScanServo();
   
-  LeftLegTest();
+  //LeftLegTest();
   
-  RightLegTest();
+  //RightLegTest();
   
   MenuOptions();
  
@@ -81,37 +81,37 @@ void loop(){
 
 
 void ScanServo(){
-  id = 1;  
+  id = 0;  
   Serial.println("###########################");
   Serial.println("Starting Servo Scanning Test.");
   Serial.println("###########################");
       
-  while (id <= SERVOCOUNT){
-  pos =  ax12GetRegister(id, 36, 2);
-  Serial.print("Servo ID: ");
-  Serial.println(id);
-  Serial.print("Servo Position: ");
-  Serial.println(pos);
-  
-  if (pos <= 0){
-  Serial.println("###########################");
-  Serial.print("ERROR! Servo ID: ");
-  Serial.print(id);
-  Serial.println(" not found. Please check connection and verify correct ID is set.");
-  Serial.println("###########################"); 
-  IDCheck = 0;
+  while (id < SERVOCOUNT){
+    pos =  ax12GetRegister(id, 36, 2);
+    Serial.print("Servo ID: ");
+    Serial.print(id);
+    Serial.print(" Position: ");
+    Serial.println(pos);
+    
+    if (pos <= 0){
+      Serial.println("###########################");
+      Serial.print("ERROR! Servo ID: ");
+      Serial.print(id);
+      Serial.println(" not found. Please check connection and verify correct ID is set.");
+      Serial.println("###########################"); 
+      IDCheck = 0;
+    }
+    
+    id = (id++)%SERVOCOUNT;
   }
-  
-  id = (id++)%SERVOCOUNT;
   delay(1000);
-  }
   if (IDCheck == 0){
     Serial.println("###########################");
     Serial.println("ERROR! Servo ID(s) are missing from Scan. Please check connection and verify correct ID is set.");
     Serial.println("###########################");  
   }
   else{
-  Serial.println("All servo IDs present.");
+    Serial.println("All servo IDs present.");
   }
     if (RunCheck == 1){
     MenuOptions();
@@ -165,8 +165,8 @@ void LeftLegTest(){
   Serial.println("Initializing Left Leg Tests");  
   Serial.println("###########################");
   delay(500);  
-  id = 1;
-  while(id <= (SERVOCOUNT-1)){
+  id = 0;
+  while(id < SERVOCOUNT){
     
   Serial.print("Moving Servo ID: ");
   Serial.println(id);    
@@ -266,11 +266,11 @@ void MenuOptions(){
 }
 
 void RelaxServos(){
-  id = 1;
+  id = 0;
   Serial.println("###########################");
   Serial.println("Relaxing Servos.");
   Serial.println("###########################");    
-  while(id <= SERVOCOUNT){
+  while(id < SERVOCOUNT){
     Relax(id);
     id = (id++)%SERVOCOUNT;
     delay(50);
@@ -282,11 +282,11 @@ void RelaxServos(){
 
 
 void LEDTest(){
-    id = 1;
+    id = 0;
   Serial.println("###########################");
   Serial.println("Running LED Test");
   Serial.println("###########################");    
-  while(id <= SERVOCOUNT){
+  while(id < SERVOCOUNT){
     ax12SetRegister(id, 25, 1);
     Serial.print("LED ON - Servo ID: ");
     Serial.println(id);
