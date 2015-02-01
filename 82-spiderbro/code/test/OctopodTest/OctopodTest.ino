@@ -10,6 +10,9 @@ int pos;
 boolean IDCheck;
 boolean RunCheck;
 
+// #define STEP_THROUGH_GAITS
+int runningGait = 0;
+
 void setup(){
    pinMode(0,OUTPUT);  
    
@@ -37,41 +40,47 @@ void setup(){
 void loop(){
   // read the sensor:
   
-    int inByte = Serial.read();
+  int inByte = Serial.read();
 
-    switch (inByte) {
+  switch (inByte) {
 
-    case '1':    
-      ScanServo();
-      break;
+  case '1':    
+    ScanServo();
+    break;
 
-    case '2':    
-      MoveCenter();
-      break;
-      
-     case '3':    
-      RelaxServos();
-      break;     
+  case '2':    
+    MoveCenter();
+    break;
+    
+   case '3':    
+    RelaxServos();
+    break;     
 
-    case '4':    
-      CheckVoltage();
-      break;
+  case '4':    
+    CheckVoltage();
+    break;
 
-    case '5':    
-      LeftLegTest();
-      break;
-      
-    case '6':    
-      RightLegTest();
-      break;
-      
-    case '7':
-      LEDTest();
-      break;
-      
+  case '5':
+    LEDTest();
+    break;
+    
+  case '6': 
+    StartSimpleGait();   
+    break;
+    
+  case '7':
+    StopGait();
+    break;  
 
-    } 
-  
+  case '8':
+    PoseStand();
+    break;  
+  } 
+
+  if (runningGait == 1){
+    // Commented out while we step through it manually.
+    _runSimpleGaitStep();
+  }
 }
 
 
@@ -154,108 +163,105 @@ void MoveCenter(){
   }
 }
 
-
-void LeftLegTest(){
+void StartSimpleGait(){
+  delay(100);
   Serial.println("###########################");
-  Serial.println("Initializing Left Leg Tests");  
-  Serial.println("###########################");
-  delay(500);  
-  id = 0;
-  while(id < SERVOCOUNT){
-    
-  Serial.print("Moving Servo ID: ");
-  Serial.println(id);    
-  SetPosition(id, 412);
+  Serial.println("Starting Simple Gait");
+  Serial.println("###########################"); 
   delay(1000);
-  SetPosition(id, 512);
-  delay(1000);
-//iterate to next servo ID
-  id = id + 2;
-
-
-  Serial.print("Moving Servo ID: ");
-  Serial.println(id);
-  SetPosition(id, 712);
-  delay(1000);
-  SetPosition(id, 512);
-  delay(1000);
-//iterate to next servo ID
-  id = id + 2;  
-
-
-  Serial.print("Moving Servo ID: ");
-  Serial.println(id);
-  SetPosition(id, 712);
-  delay(1000);
-  SetPosition(id, 512);
-  delay(1000);
-  //iterate to next servo ID
-  id = id + 2;  
-  }
-    if (RunCheck == 1){
-   MenuOptions();
-  }
   
+  // Can step through gaits if this is enabled.
+  #ifdef STEP_THROUGH_GAITS
+    _runSimpleGaitStep();
+  #else
+    runningGait = 1;
+  #endif
+  
+  if (RunCheck == 1){
+    MenuOptions();
+  }
 }
 
+// Simple tripod gait.
+int _simpleGaitStep = 0;
 
-
-
-void RightLegTest(){
-
+void StopGait(){
   Serial.println("###########################");
-  Serial.println("Initializing Right Leg Tests"); 
-  Serial.println("###########################");
-  delay(500);  
-  id = 2;
-  while(id <= SERVOCOUNT){
-
-  Serial.print("Moving Servo ID: ");
-  Serial.println(id);  
-  SetPosition(id, 612);
-  delay(1000);
-  SetPosition(id, 512);
-  delay(1000);
-//iterate to next servo ID
-  id = id + 2;
-
-
-  Serial.print("Moving Servo ID: ");
-  Serial.println(id);
-  SetPosition(id, 312);
-  delay(1000);
-  SetPosition(id, 512);
-  delay(1000);
-//iterate to next servo ID
-  id = id + 2;  
-
-
-  Serial.print("Moving Servo ID: ");
-  Serial.println(id);
-  SetPosition(id, 312);
-  delay(1000);
-  SetPosition(id, 512);
-  delay(1000);
-  //iterate to next servo ID
-  id = id + 2;  
+  Serial.println("Stopping Gaits");
+  Serial.println("###########################"); 
+  runningGait = 0;
+  _simpleGaitStep = 0;
+  if (RunCheck == 1){
+    MenuOptions();
   }
-      if (RunCheck == 1){
-      MenuOptions();
-  }
-  
 }
 
+void _runSimpleGaitStep() {
+  // load the pose from FLASH, into the nextPose buffer
+  switch (_simpleGaitStep) {
+    // Raise and forward leg set 1
+    case 0:
+      bioloid.loadPose(SimpleRaiseSet1);
+    break;
+    // Lower and forward leg set 1
+    case 1:
+      bioloid.loadPose(SimpleLowerSet1);
+    break;
+    // Raise leg set 2 forward, while moving leg set 1.
+    case 2:
+      bioloid.loadPose(SimpleRaiseSet2);
+    break;
+    // Lower set 2.
+    case 3:
+      bioloid.loadPose(SimpleLowerSet2);
+    break;
+  }
+
+  // read in current servo positions to the curPose buffer
+  bioloid.readPose();
+
+  bioloid.interpolateSetup(1000); // setup for interpolation from current->next over 1/2 a second
+  while(bioloid.interpolating > 0){  // do this while we have not reached our new pose
+    bioloid.interpolateStep();     // move servos, if necessary. 
+    delay(3);
+  }
+  _simpleGaitStep++;
+
+  // Reset the current step.
+  if (_simpleGaitStep > 3) {
+    _simpleGaitStep = 0;
+  }
+}
+
+void PoseStand(){
+  delay(100);                    // recommended pause
+  bioloid.loadPose(Standing);   // load the pose from FLASH, into the nextPose buffer
+  bioloid.readPose();            // read in current servo positions to the curPose buffer
+  Serial.println("###########################");
+  Serial.println("Standing.");
+  Serial.println("###########################");    
+  delay(1000);
+  bioloid.interpolateSetup(1000); // setup for interpolation from current->next over 1/2 a second
+  while(bioloid.interpolating > 0){  // do this while we have not reached our new pose
+      bioloid.interpolateStep();     // move servos, if necessary. 
+      delay(3);
+  }
+  if (RunCheck == 1){
+    MenuOptions();
+}
+}
 
 void MenuOptions(){
     Serial.println("###########################"); 
-    Serial.println("Please enter option 1-5 to run individual tests again.");     
+    Serial.println("Please enter option 1-7 to run individual tests again.");     
     Serial.println("1) Servo Scanning Test");        
     Serial.println("2) Move Servos to Center");        
     Serial.println("3) Relax Servos");
-    Serial.println("4) Check System Voltage");    
-    Serial.println("5) Perform Left Leg Sign Test");        
-    Serial.println("6) Perform Right Leg Sign Test");
-    Serial.println("7) Perform LED Test");        
+    Serial.println("4) Check System Voltage"); 
+    Serial.println("5) Perform LED Test");   
+    Serial.println("6) Start simple gait");
+    Serial.println("7) Reset gait");
+    Serial.println("8) Stand up");
     Serial.println("###########################"); 
 }
 
