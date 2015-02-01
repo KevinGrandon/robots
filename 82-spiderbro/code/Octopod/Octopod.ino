@@ -220,7 +220,7 @@ void _runSimpleGaitStep() {
   // read in current servo positions to the curPose buffer
   bioloid.readPose();
 
-  bioloid.interpolateSetup(1000); // setup for interpolation from current->next over 1/2 a second
+  bioloid.interpolateSetup(500); // setup for interpolation from current->next over 1/2 a second
   while(bioloid.interpolating > 0){  // do this while we have not reached our new pose
     bioloid.interpolateStep();     // move servos, if necessary. 
     delay(3);
