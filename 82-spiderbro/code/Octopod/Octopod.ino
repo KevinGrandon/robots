@@ -10,9 +10,10 @@ int pos;
 boolean IDCheck;
 boolean RunCheck;
 
-#define STEP_THROUGH_GAITS
+// #define STEP_THROUGH_GAITS
 int runningGait = 0;
 int leftTurningGait = 0;
+int rightTurningGait = 0;
 
 void setup(){
    pinMode(0,OUTPUT);  
@@ -39,45 +40,54 @@ void setup(){
 }
 
 void loop(){
-  // read the sensor:
-  
-  int inByte = Serial.read();
+
+  // Read input from serial.
+  int inByte;
+  if (Serial.available()) {
+    inByte = Serial.parseInt();
+    Serial.println("Got option: ");
+    Serial.println(inByte);
+  }
 
   switch (inByte) {
 
-  case '1':    
+  case 1:
     ScanServo();
     break;
 
-  case '2':    
+  case 2:
     MoveCenter();
     break;
     
-   case '3':    
+   case 3:
     RelaxServos();
     break;     
 
-  case '4':    
+  case 4:
     CheckVoltage();
     break;
 
-  case '5':
+  case 5:
     LEDTest();
     break;
     
-  case '6': 
+  case 6: 
     StartSimpleGait();   
     break;
 
-  case '7': 
+  case 7: 
     StartSimpleLeftTurnGait();   
     break;
-    
-  case '8':
+
+  case 8: 
+    StartSimpleRightTurnGait();   
+    break;
+
+  case 9:
     StopGait();
     break;  
 
-  case '9':
+  case 10:
     PoseStand();
     break;  
   } 
@@ -87,6 +97,8 @@ void loop(){
     _runSimpleGaitStep();
   } else if(leftTurningGait == 1) {
     _runSimpleLeftTurnGaitStep();
+  } else if(rightTurningGait == 1) {
+    _runSimpleRightTurnGaitStep();
   }
 }
 
@@ -189,6 +201,26 @@ void StartSimpleLeftTurnGait(){
   }
 }
 
+void StartSimpleRightTurnGait(){
+  delay(100);
+  Serial.println("###########################");
+  Serial.println("Starting Simple Right Turn Gait");
+  Serial.println("###########################"); 
+  delay(1000);
+  
+  // Can step through gaits if this is enabled.
+  #ifdef STEP_THROUGH_GAITS
+    _runSimpleRightTurnGaitStep();
+  #else
+    rightTurningGait = 1;
+  #endif
+  
+  if (RunCheck == 1){
+    MenuOptions();
+  }
+}
+
+
 void StartSimpleGait(){
   delay(100);
   Serial.println("###########################");
@@ -218,6 +250,7 @@ void StopGait(){
 
   runningGait = 0;
   leftTurningGait = 0;
+  rightTurningGait = 0;
 
   _simpleGaitStep = 0;
   if (RunCheck == 1){
@@ -295,6 +328,39 @@ void _runSimpleLeftTurnGaitStep(){
   }
 }
 
+void _runSimpleRightTurnGaitStep(){
+  // load the pose from FLASH, into the nextPose buffer
+  switch (_simpleGaitStep) {
+    case 0:
+      bioloid.loadPose(SimpleRightTurn1);
+    break;
+    case 1:
+      bioloid.loadPose(SimpleRightTurn2);
+    break;
+    case 2:
+      bioloid.loadPose(SimpleRightTurn3);
+    break;
+    case 3:
+      bioloid.loadPose(SimpleRightTurn4);
+    break;
+  }
+
+  // read in current servo positions to the curPose buffer
+  bioloid.readPose();
+
+  bioloid.interpolateSetup(500); // setup for interpolation from current->next over 1/2 a second
+  while(bioloid.interpolating > 0){  // do this while we have not reached our new pose
+    bioloid.interpolateStep();     // move servos, if necessary. 
+    delay(3);
+  }
+  _simpleGaitStep++;
+
+  // Reset the current step.
+  if (_simpleGaitStep > 3) {
+    _simpleGaitStep = 0;
+  }
+}
+
 void PoseStand(){
   delay(100);                    // recommended pause
   bioloid.loadPose(Standing);   // load the pose from FLASH, into the nextPose buffer
@@ -323,8 +389,9 @@ void MenuOptions(){
     Serial.println("5) Perform LED Test");   
     Serial.println("6) Start simple gait");
     Serial.println("7) Start simple left turn gait");
-    Serial.println("8) Reset gait");
-    Serial.println("9) Stand up");
+    Serial.println("8) Start simple right turn gait");
+    Serial.println("9) Reset gait");
+    Serial.println("10) Stand up");
     Serial.println("###########################"); 
 }
 
