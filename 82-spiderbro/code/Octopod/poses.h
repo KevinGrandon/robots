@@ -23,6 +23,7 @@ const int sRBackward = 512 - maxMovement;
 const int sLForward = 512 - maxMovement;
 const int sLBackward = 512 + maxMovement;
 
+// A simple 4-step gait.
 // Lift half, move forward.
 PROGMEM prog_uint16_t SimpleRaiseSet1[] = {24,
 	sLForward, sLBackward,   sLForward,  sLBackward,   sRForward, sRBackward,  sRForward, sRBackward,
@@ -31,8 +32,8 @@ PROGMEM prog_uint16_t SimpleRaiseSet1[] = {24,
 
 // Place legs down, all legs on ground.
 PROGMEM prog_uint16_t SimpleLowerSet1[] = {24,
-        sLForward, sLBackward,   sLForward,  sLBackward,   sRForward, sRBackward,  sRForward, sRBackward,
-	sLCoxadDown,  sLCoxadDown,  sLCoxadDown,  sLCoxadDown, sRCoxaDown,  sRCoxaDown,  sRCoxaDown,  sRCoxaDown,
+        sLForward,   sLBackward,   sLForward,    sLBackward,  sRForward,   sRBackward,  sRForward,  sRBackward,
+	sLCoxadDown, sLCoxadDown,  sLCoxadDown,  sLCoxadDown, sRCoxaDown,  sRCoxaDown,  sRCoxaDown, sRCoxaDown,
 	512, 512, 512, 512, 512, 512, 512, 512};
 
 // Lift other half, move forward.
@@ -43,7 +44,32 @@ PROGMEM prog_uint16_t SimpleRaiseSet2[] = {24,
 
 // Place legs down, all legs on ground.
 PROGMEM prog_uint16_t SimpleLowerSet2[] = {24,
-	sLBackward,   sLForward,    sLBackward,  sLForward,  sRBackward,  sRForward, sRBackward,  sRForward,
+	sLBackward,   sLForward,    sLBackward,   sLForward,   sRBackward,  sRForward,   sRBackward,  sRForward,
+	sLCoxadDown,  sLCoxadDown,  sLCoxadDown,  sLCoxadDown, sRCoxaDown,  sRCoxaDown,  sRCoxaDown,  sRCoxaDown,
+	512, 512, 512, 512, 512, 512, 512, 512};
+
+// A simple 4-step left-turn.
+// Lift half, move forward.
+PROGMEM prog_uint16_t SimpleLeftTurn1[] = {24,
+	sLForward, sLBackward,   sLForward,  sLBackward,   sRBackward,  sRForward, sRBackward, sRForward,
+	sLCoxaUp,  sLCoxadDown,  sLCoxaUp,   sLCoxadDown,  sRCoxaUp,  sRCoxaDown,  sRCoxaUp,  sRCoxaDown,
+	512, 512, 512, 512, 512, 512, 512, 512};
+
+// Place legs down, all legs on ground.
+PROGMEM prog_uint16_t SimpleLeftTurn2[] = {24,
+        sLForward,   sLBackward,   sLForward,    sLBackward,  sRBackward,  sRForward,  sRBackward,  sRForward, 
+	sLCoxadDown, sLCoxadDown,  sLCoxadDown,  sLCoxadDown, sRCoxaDown,  sRCoxaDown,  sRCoxaDown, sRCoxaDown,
+	512, 512, 512, 512, 512, 512, 512, 512};
+
+// Lift other half, move forward.
+PROGMEM prog_uint16_t SimpleLeftTurn3[] = {24,
+	sLBackward,   sLForward,    sLBackward,  sLForward,  sRForward, sRBackward,  sRForward,  sRBackward,
+	sLCoxadDown,  sLCoxaUp,   sLCoxadDown,   sLCoxaUp,   sRCoxaDown,  sRCoxaUp,  sRCoxaDown,  sRCoxaUp, 
+	512, 512, 512, 512, 512, 512, 512, 512};
+
+// Place legs down, all legs on ground.
+PROGMEM prog_uint16_t SimpleLeftTurn4[] = {24,
+	sLBackward,   sLForward,    sLBackward,   sLForward,   sRForward,   sRBackward,  sRForward,   sRBackward,
 	sLCoxadDown,  sLCoxadDown,  sLCoxadDown,  sLCoxadDown, sRCoxaDown,  sRCoxaDown,  sRCoxaDown,  sRCoxaDown,
 	512, 512, 512, 512, 512, 512, 512, 512};
 
