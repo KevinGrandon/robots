@@ -18,24 +18,19 @@ void setup(){
    pos = 0;
    IDCheck = 1;
    RunCheck = 0;
+
   //open serial port
    Serial.begin(9600);
    delay (500);   
    Serial.println("###########################");    
-   Serial.println("Serial Communication Established.");    
+   Serial.println("Serial Communication Established.");
+
   //Check Lipo Battery Voltage
   CheckVoltage();
+
   //Scan Servos, return position.
-  
-  //MoveCenter();
   ScanServo();
-  
-  //LeftLegTest();
-  
-  //RightLegTest();
-  
   MenuOptions();
- 
   RunCheck = 1;
 }
 
@@ -59,15 +54,15 @@ void loop(){
       break;     
 
     case '4':    
+      CheckVoltage();
+      break;
+
+    case '5':    
       LeftLegTest();
       break;
       
-    case '5':    
-      RightLegTest();
-      break;
-      
     case '6':    
-      CheckVoltage();
+      RightLegTest();
       break;
       
     case '7':
@@ -252,15 +247,14 @@ void RightLegTest(){
 
 
 void MenuOptions(){
-  
     Serial.println("###########################"); 
     Serial.println("Please enter option 1-5 to run individual tests again.");     
     Serial.println("1) Servo Scanning Test");        
     Serial.println("2) Move Servos to Center");        
-    Serial.println("3) Relax Servos");            
-    Serial.println("4) Perform Left Leg Sign Test");        
-    Serial.println("5) Perform Right Leg Sign Test");        
-    Serial.println("6) Check System Voltage");    
+    Serial.println("3) Relax Servos");
+    Serial.println("4) Check System Voltage");    
+    Serial.println("5) Perform Left Leg Sign Test");        
+    Serial.println("6) Perform Right Leg Sign Test");
     Serial.println("7) Perform LED Test");        
     Serial.println("###########################"); 
 }
