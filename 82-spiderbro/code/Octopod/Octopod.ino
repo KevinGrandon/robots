@@ -1,8 +1,10 @@
 #include <ax12.h>
 #include <BioloidController.h>
+//#include <Commander.h>
 #include "poses.h"
 
 BioloidController bioloid = BioloidController(1000000);
+//Commander command = Commander();
 
 const int SERVOCOUNT = 24;
 int id;
@@ -26,6 +28,7 @@ void setup(){
 
   //open serial port
    Serial.begin(9600);
+   //Serial.begin(38400);
    delay (500);   
    Serial.println("###########################");    
    Serial.println("Serial Communication Established.");
@@ -41,6 +44,31 @@ void setup(){
 
 void loop(){
 
+  // Read input from Arbotix Commander.
+  /*
+  if(command.ReadMsgs() > 0){
+    Serial.println("Got command messages.");
+    
+    Serial.print("command.walkH ");
+    Serial.println(command.walkH);
+
+    Serial.print("command.walkV ");
+    Serial.println(command.walkV);
+    
+    // Top buttons control left/right turning.
+    if(command.buttons & BUT_RT){
+      rightTurningGait = 1;
+    }else{
+      rightTurningGait = 0;
+    }
+    if(command.buttons & BUT_LT){
+      leftTurningGait = 1;
+    }else{
+      leftTurningGait = 0;
+    }
+  }
+  */
+  
   // Read input from serial.
   int inByte;
   if (Serial.available()) {
@@ -50,7 +78,6 @@ void loop(){
   }
 
   switch (inByte) {
-
   case 1:
     ScanServo();
     break;
@@ -250,7 +277,6 @@ void StopGait(){
 
   runningGait = 0;
   leftTurningGait = 0;
-  rightTurningGait = 0;
 
   _simpleGaitStep = 0;
   if (RunCheck == 1){
