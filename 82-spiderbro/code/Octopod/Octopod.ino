@@ -3,6 +3,17 @@
 //#include <Commander.h>
 #include "poses.h"
 
+// Enable to use XBee
+// #define USE_XBEE
+
+// Uncomment to step through each gait as we receive commands.
+// #define STEP_THROUGH_GAITS
+
+// If we're not using an XBEE, debug to serial.
+#ifndef USE_XBEE
+  #define DEBUG
+#endif
+
 BioloidController bioloid = BioloidController(1000000);
 //Commander command = Commander();
 
@@ -12,11 +23,6 @@ int pos;
 boolean IDCheck;
 boolean RunCheck;
 
-// Enable to use XBee
-// #define USE_XBEE
-
-// Uncomment to step through each gait as we receive commands.
-// #define STEP_THROUGH_GAITS
 int runningGait = 0;
 int leftTurningGait = 0;
 int rightTurningGait = 0;
@@ -31,11 +37,15 @@ void setup(){
    RunCheck = 0;
 
   //open serial port
+#ifdef USE_XBEE
+   Serial.begin(38400);
+#else
    Serial.begin(9600);
-   //Serial.begin(38400);
-   delay (500);   
-   Serial.println("###########################");    
+   Serial.println("###########################");
    Serial.println("Serial Communication Established.");
+   Serial.println("###########################");
+#endif
+   delay (500);
 
   //Check Lipo Battery Voltage
   CheckVoltage();
@@ -72,7 +82,8 @@ void loop(){
     }
   }
 #endif
-  
+
+#ifdef DEBUG
   // Read input from serial.
   int inByte;
   if (Serial.available()) {
@@ -131,6 +142,7 @@ void loop(){
   } else if(rightTurningGait == 1) {
     _runSimpleRightTurnGaitStep();
   }
+#endif
 }
 
 
@@ -214,10 +226,12 @@ void MoveCenter(){
 }
 
 void StartSimpleLeftTurnGait(){
+#ifdef DEBUG
   delay(100);
   Serial.println("###########################");
   Serial.println("Starting Simple Left Turn Gait");
   Serial.println("###########################"); 
+#endif
   delay(1000);
   
   // Can step through gaits if this is enabled.
@@ -233,10 +247,12 @@ void StartSimpleLeftTurnGait(){
 }
 
 void StartSimpleRightTurnGait(){
+#ifdef DEBUG
   delay(100);
   Serial.println("###########################");
   Serial.println("Starting Simple Right Turn Gait");
   Serial.println("###########################"); 
+#endif
   delay(1000);
   
   // Can step through gaits if this is enabled.
@@ -253,10 +269,12 @@ void StartSimpleRightTurnGait(){
 
 
 void StartSimpleGait(){
+#ifdef DEBUG
   delay(100);
   Serial.println("###########################");
   Serial.println("Starting Simple Gait");
   Serial.println("###########################"); 
+#endif
   delay(1000);
   
   // Can step through gaits if this is enabled.
@@ -395,9 +413,11 @@ void PoseStand(){
   delay(100);                    // recommended pause
   bioloid.loadPose(Standing);   // load the pose from FLASH, into the nextPose buffer
   bioloid.readPose();            // read in current servo positions to the curPose buffer
+#ifdef DEBUG
   Serial.println("###########################");
   Serial.println("Standing.");
   Serial.println("###########################");    
+#endif
   delay(1000);
   bioloid.interpolateSetup(1000); // setup for interpolation from current->next over 1/2 a second
   while(bioloid.interpolating > 0){  // do this while we have not reached our new pose
