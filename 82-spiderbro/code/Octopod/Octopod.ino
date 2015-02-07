@@ -1,10 +1,9 @@
 #include <ax12.h>
 #include <BioloidController.h>
-//#include <Commander.h>
 #include "poses.h"
 
 // Enable to use XBee
-// #define USE_XBEE
+#define USE_XBEE
 
 // Uncomment to step through each gait as we receive commands.
 // #define STEP_THROUGH_GAITS
@@ -15,7 +14,11 @@
 #endif
 
 BioloidController bioloid = BioloidController(1000000);
-//Commander command = Commander();
+
+#ifdef USE_XBEE
+#include <Commander.h>
+Commander command = Commander();
+#endif
 
 const int SERVOCOUNT = 24;
 int id;
@@ -38,7 +41,7 @@ void setup(){
 
   //open serial port
 #ifdef USE_XBEE
-   Serial.begin(38400);
+  command.begin(38400);
 #else
    Serial.begin(9600);
    Serial.println("###########################");
@@ -51,9 +54,13 @@ void setup(){
   CheckVoltage();
 
   //Scan Servos, return position.
+#ifdef DEBUG
   ScanServo();
   MenuOptions();
   RunCheck = 1;
+#endif
+
+  PoseStand();
 }
 
 void loop(){
@@ -61,20 +68,19 @@ void loop(){
   // Read input from Arbotix Commander.
 #ifdef USE_XBEE
   if(command.ReadMsgs() > 0){
-    Serial.println("Got command messages.");
-    
-    Serial.print("command.walkH ");
-    Serial.println(command.walkH);
-
-    Serial.print("command.walkV ");
-    Serial.println(command.walkV);
-    
     // Top buttons control left/right turning.
+    if(command.walkV > 0) {
+      runningGait = 1;
+    } else {
+      runningGait = 0;
+    }
+
     if(command.buttons & BUT_RT){
       rightTurningGait = 1;
     }else{
       rightTurningGait = 0;
     }
+
     if(command.buttons & BUT_LT){
       leftTurningGait = 1;
     }else{
@@ -133,6 +139,7 @@ void loop(){
     PoseStand();
     break;  
   } 
+#endif
 
   if (runningGait == 1){
     // Commented out while we step through it manually.
@@ -142,7 +149,6 @@ void loop(){
   } else if(rightTurningGait == 1) {
     _runSimpleRightTurnGaitStep();
   }
-#endif
 }
 
 
