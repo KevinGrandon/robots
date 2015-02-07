@@ -238,7 +238,6 @@ void StartSimpleLeftTurnGait(){
   Serial.println("Starting Simple Left Turn Gait");
   Serial.println("###########################"); 
 #endif
-  delay(1000);
   
   // Can step through gaits if this is enabled.
   #ifdef STEP_THROUGH_GAITS
@@ -259,7 +258,6 @@ void StartSimpleRightTurnGait(){
   Serial.println("Starting Simple Right Turn Gait");
   Serial.println("###########################"); 
 #endif
-  delay(1000);
   
   // Can step through gaits if this is enabled.
   #ifdef STEP_THROUGH_GAITS
@@ -281,7 +279,6 @@ void StartSimpleGait(){
   Serial.println("Starting Simple Gait");
   Serial.println("###########################"); 
 #endif
-  delay(1000);
   
   // Can step through gaits if this is enabled.
   #ifdef STEP_THROUGH_GAITS
@@ -424,7 +421,7 @@ void PoseStand(){
   Serial.println("Standing.");
   Serial.println("###########################");    
 #endif
-  delay(1000);
+
   bioloid.interpolateSetup(1000); // setup for interpolation from current->next over 1/2 a second
   while(bioloid.interpolating > 0){  // do this while we have not reached our new pose
       bioloid.interpolateStep();     // move servos, if necessary. 
