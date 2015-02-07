@@ -12,6 +12,10 @@ int pos;
 boolean IDCheck;
 boolean RunCheck;
 
+// Enable to use XBee
+// #define USE_XBEE
+
+// Uncomment to step through each gait as we receive commands.
 // #define STEP_THROUGH_GAITS
 int runningGait = 0;
 int leftTurningGait = 0;
@@ -45,7 +49,7 @@ void setup(){
 void loop(){
 
   // Read input from Arbotix Commander.
-  /*
+#ifdef USE_XBEE
   if(command.ReadMsgs() > 0){
     Serial.println("Got command messages.");
     
@@ -67,7 +71,7 @@ void loop(){
       leftTurningGait = 0;
     }
   }
-  */
+#endif
   
   // Read input from serial.
   int inByte;
