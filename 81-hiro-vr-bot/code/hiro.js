@@ -1,5 +1,7 @@
 var pinio = new (require('pinio')).Pinio()
 
+var control;
+
 pinio.on('ready', function(board) {
 
 	var robot = {
@@ -8,15 +10,59 @@ pinio.on('ready', function(board) {
 		speedLeft: 0,
 		speedRight: 0,
 
-		speed: 200 // Max is 255? Limit to avoid craziness for now.
+		speed: 255 // Max is 255? Limit to avoid craziness for now.
 	};
 
-	var control = require(__dirname + '/control.js')
+	control = require(__dirname + '/control.js')
 	control.init(robot)
+})
 
-	// Go forward and stop.
-	control.forward(robot);
-	setTimeout(function() {
-		control.stop(robot)
-	}, 5000)
+// Webserver.
+var express = require('express');
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+var port = process.env.PORT || 3000;
+
+app.use(express.static(__dirname + '/www'));
+
+io.on('connection', function (socket) {
+	console.log('got connection');
+
+	socket.on('start', function (data) {
+		console.log('data is:', data);
+		var key = data.command;
+		var commandMap = {
+			up: 'forward',
+			right: 'rightTurn',
+			down: 'backward',
+			left: 'leftTurn'
+		};
+
+		var robotMethod = commandMap[key]
+		if (!robotMethod) {
+			console.log('No command found for ', key)
+			return
+		}
+
+		if (!control) {
+			console.log('Robot not initialized yet')
+			return
+		}
+
+		control[robotMethod]()
+	})
+
+	socket.on('stop', function (data) {
+		if (!control) {
+			console.log('Robot not initialized yet')
+			return
+		}
+
+		control.stop()
+	});
+});
+
+server.listen(port, function () {
+	console.log('Server listening at port %d', port)
 })

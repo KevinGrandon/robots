@@ -1,6 +1,11 @@
 var motor1Speed, motor2Speed, motor1Dir, motor2Dir
 
-exports.init = function(robot) {
+// Local robot spec reference.
+var robot;
+
+exports.init = function(_robot) {
+
+	robot = _robot;
 
 	motor1Speed = new robot.board.Component({
 		pin: 5
@@ -23,7 +28,7 @@ exports.init = function(robot) {
  * Ramps the speed of a robot up over 500ms
  */
 var rampSpeedNext
-function rampSpeed(robot, left, right) {
+function rampSpeed(left, right) {
 
 	var nextLeft, nextRight
 	var step = 10
@@ -92,12 +97,12 @@ function rampSpeed(robot, left, right) {
 		motor2Dir.low()
 
 
-	//console.log('Writing speed: ', robot.speedLeft, robot.speedRight )
+	console.log('Writing speed: ', left, right, robot.speedLeft, robot.speedRight )
 
 	// Set timeout if we actually have more steps
 	if (left != robot.speedLeft || right != robot.speedRight) {
 		console.log('Ramped speed to: ', robot.speedLeft, robot.speedRight)
-		rampSpeedNext = setTimeout(rampSpeed.bind(this, robot, left, right), 25)
+		rampSpeedNext = setTimeout(rampSpeed.bind(this, left, right), 25)
 	} else {
 		console.log('Reached target speed.', robot.speedLeft, robot.speedRight)
 	}
@@ -118,49 +123,49 @@ var control = {
 	/**
 	 * Similar to abruptStop, but ramps down and decellerates the motor
 	 */
-	stop: function(robot){
+	stop: function(){
 
 		motor1Speed.mode('PWM')
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(robot, 0, 0)
+		rampSpeed(0, 0)
 	},
 
-	forward: function(robot){
+	forward: function(){
 
 		motor1Speed.mode('PWM')
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(robot, robot.speed, robot.speed)
+		rampSpeed(robot.speed, robot.speed)
 	},
 
-	backward: function(robot){
+	backward: function(){
 
 		motor1Speed.mode('PWM')
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(robot, 0-robot.speed, 0-robot.speed)
+		rampSpeed(0-robot.speed, 0-robot.speed)
 	},
 
-	leftTurn: function(robot){
+	leftTurn: function(){
 
 		motor1Speed.mode('PWM')
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(robot, 0-robot.speed, robot.speed)
+		rampSpeed(0-robot.speed, robot.speed)
 	},
 
-	rightTurn: function(robot){
+	rightTurn: function(){
 
 		motor1Speed.mode('PWM')
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(robot, robot.speed, 0-robot.speed)
+		rampSpeed(robot.speed, 0-robot.speed)
 	}
 }
 
