@@ -6,6 +6,7 @@
 	flex: auto;
 	height: 40px;
 	border-radius: 6px;
+	margin: 0 10px;
 	border: 1px solid #000;
 	background: #fff;
 }

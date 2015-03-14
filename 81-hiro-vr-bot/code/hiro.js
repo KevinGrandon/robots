@@ -19,6 +19,9 @@ pinio.on('ready', function(board) {
 		}
 	};
 
+	bumpers = require(__dirname + '/bumpers.js')
+	bumpers.init(robot)
+
 	control = require(__dirname + '/control.js')
 	control.init(robot)
 })
