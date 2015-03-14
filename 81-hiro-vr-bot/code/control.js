@@ -104,7 +104,7 @@ function rampSpeed(left, right) {
 	if (robot.speedLeft > 0 && lastMotor1Dir !== 1) {
 		lastMotor1Dir = 1;
 		motor1Dir.high()
-	} else if (lastMotor1Dir !== 0) {
+	} else if (robot.speedLeft < 0 && lastMotor1Dir !== 0) {
 		lastMotor1Dir = 0;
 		motor1Dir.low()
 	}
@@ -114,7 +114,7 @@ function rampSpeed(left, right) {
 	if (robot.speedRight > 0 && lastMotor2Dir !== 1) {
 		lastMotor2Dir = 1
 		motor2Dir.high()
-	} else if (lastMotor2Dir !== 0) {
+	} else if (robot.speedRight < 0 && lastMotor2Dir !== 0) {
 		lastMotor2Dir = 0
 		motor2Dir.low()
 	}
