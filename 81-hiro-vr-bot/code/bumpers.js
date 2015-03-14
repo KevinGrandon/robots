@@ -23,6 +23,7 @@ exports.init = function(robot) {
 		})
 
 		bumpers.read(function(data) {
+			console.log('Got bumper data:', data)
 			if (data == 0) {
 				// Set direction
 				console.log('Hit detected on ', def.pos, ' bumper.')
