@@ -25,6 +25,22 @@ exports.init = function(_robot) {
 }
 
 /**
+ * Enables PWM for the pin if needed.
+ * We store the state of the pwm pin in _pwnEnabled.
+ * This is false after a stop command.
+ */
+var _pwnEnabled = false
+function enablePWM() {
+	if (_pwnEnabled) {
+		return
+	}
+
+	motor1Speed.mode('PWM')
+	motor2Speed.mode('PWM')
+	_pwnEnabled = true
+}
+
+/**
  * Ramps the speed of a robot up over 500ms
  */
 var rampSpeedNext
@@ -116,6 +132,8 @@ var control = {
 		motor1Speed.output()
 		motor2Speed.output()
 
+		_pwnEnabled = true
+
 		motor1Speed.low()
 		motor2Speed.low()
 	},
@@ -124,46 +142,31 @@ var control = {
 	 * Similar to abruptStop, but ramps down and decellerates the motor
 	 */
 	stop: function(){
-
-		motor1Speed.mode('PWM')
-		motor2Speed.mode('PWM')
-
+		enablePWM()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(0, 0)
 	},
 
 	forward: function(){
-
-		motor1Speed.mode('PWM')
-		motor2Speed.mode('PWM')
-
+		enablePWM()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(robot.speed, robot.speed)
 	},
 
 	backward: function(){
-
-		motor1Speed.mode('PWM')
-		motor2Speed.mode('PWM')
-
+		enablePWM()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(0-robot.turnSpeed, 0-robot.turnSpeed)
 	},
 
 	leftTurn: function(){
-
-		motor1Speed.mode('PWM')
-		motor2Speed.mode('PWM')
-
+		enablePWM()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(0-robot.turnSpeed, robot.turnSpeed)
 	},
 
 	rightTurn: function(){
-
-		motor1Speed.mode('PWM')
-		motor2Speed.mode('PWM')
-
+		enablePWM()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(robot.speed, 0-robot.speed)
 	}
