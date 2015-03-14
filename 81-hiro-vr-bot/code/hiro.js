@@ -10,7 +10,8 @@ pinio.on('ready', function(board) {
 		speedLeft: 0,
 		speedRight: 0,
 
-		speed: 255 // Max is 255? Limit to avoid craziness for now.
+		speed: 255, // Max is 255? Limit to avoid craziness for now.
+		turnSpeed: 175
 	};
 
 	control = require(__dirname + '/control.js')

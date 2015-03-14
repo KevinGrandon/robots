@@ -147,7 +147,7 @@ var control = {
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(0-robot.speed, 0-robot.speed)
+		rampSpeed(0-robot.turnSpeed, 0-robot.turnSpeed)
 	},
 
 	leftTurn: function(){
@@ -156,7 +156,7 @@ var control = {
 		motor2Speed.mode('PWM')
 
 		clearTimeout(rampSpeedNext)
-		rampSpeed(0-robot.speed, robot.speed)
+		rampSpeed(0-robot.turnSpeed, robot.turnSpeed)
 	},
 
 	rightTurn: function(){
