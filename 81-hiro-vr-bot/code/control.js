@@ -1,4 +1,5 @@
 var motor1Speed, motor2Speed, motor1Dir, motor2Dir
+var lastMotor1Dir, lastMotor2Dir;
 
 // Local robot spec reference.
 var robot;
@@ -84,17 +85,23 @@ function rampSpeed(left, right) {
 
 	// Write left speed to motor and direction
 	motor1Speed.write(Math.abs(robot.speedLeft))
-	if (robot.speedLeft > 0)
+	if (robot.speedLeft > 0 && lastMotor1Dir !== 1) {
+		lastMotor1Dir = 1;
 		motor1Dir.high()
-	else
+	} else if (lastMotor1Dir !== 0) {
+		lastMotor1Dir = 0;
 		motor1Dir.low()
+	}
 
 	// Write right speed to motor and direction
 	motor2Speed.write(Math.abs(robot.speedRight))
-	if (robot.speedRight > 0)
+	if (robot.speedRight > 0 && lastMotor2Dir !== 1) {
+		lastMotor2Dir = 1
 		motor2Dir.high()
-	else
+	} else if (lastMotor2Dir !== 0) {
+		lastMotor2Dir = 0
 		motor2Dir.low()
+	}
 
 
 	console.log('Writing speed: ', left, right, robot.speedLeft, robot.speedRight )
