@@ -99,8 +99,7 @@ function rampSpeed(left, right) {
 	else if (robot.speedRight < -255)
 		robot.speedRight = -255
 
-	// Write left speed to motor and direction
-	motor1Speed.write(Math.abs(robot.speedLeft))
+	// Write left motor direction
 	if (robot.speedLeft > 0 && lastMotor1Dir !== 1) {
 		lastMotor1Dir = 1;
 		motor1Dir.high()
@@ -109,8 +108,7 @@ function rampSpeed(left, right) {
 		motor1Dir.low()
 	}
 
-	// Write right speed to motor and direction
-	motor2Speed.write(Math.abs(robot.speedRight))
+	// Write right motor direction
 	if (robot.speedRight > 0 && lastMotor2Dir !== 1) {
 		lastMotor2Dir = 1
 		motor2Dir.high()
@@ -119,6 +117,8 @@ function rampSpeed(left, right) {
 		motor2Dir.low()
 	}
 
+	motor1Speed.write(Math.abs(robot.speedLeft))
+	motor2Speed.write(Math.abs(robot.speedRight))
 
 	console.log('Writing speed: ', robot.speedLeft, robot.speedRight )
 
