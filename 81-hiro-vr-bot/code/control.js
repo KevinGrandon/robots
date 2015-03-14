@@ -122,24 +122,33 @@ function rampSpeed(left, right) {
 	} else {
 		console.log('Reached target speed.', robot.speedLeft, robot.speedRight)
 	}
+
+	// Disable motors if reached speed 0.
+	if (robot.speedLeft === 0 && robot.speedRight === 0) {
+		control.disable()
+	}
 }
 
 var control = {
-	abruptStop: function(){
+	/**
+	 * Disables motors pins from being in pwm mode.
+	 */
+	disable: function(){
+		console.log('Disabling motors.')
 
 		clearTimeout(rampSpeedNext)
 
 		motor1Speed.output()
 		motor2Speed.output()
 
-		_pwnEnabled = true
+		_pwnEnabled = false
 
 		motor1Speed.low()
 		motor2Speed.low()
 	},
 
 	/**
-	 * Similar to abruptStop, but ramps down and decellerates the motor
+	 * Similar to disable, but ramps down and decellerates the motor
 	 */
 	stop: function(){
 		enablePWMIfNeeded()
