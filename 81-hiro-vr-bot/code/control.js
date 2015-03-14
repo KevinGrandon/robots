@@ -188,8 +188,8 @@ var control = {
 	}
 }
 
+exports.disable = control.disable
 exports.stop = control.stop
-exports.gentleStop = control.gentleStop
 exports.forward = control.forward
 exports.backward = control.backward
 exports.leftTurn = control.leftTurn
