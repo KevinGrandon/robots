@@ -36,8 +36,15 @@ document.body.addEventListener('keyup', e => {
 	socket.emit('stop');
 });
 
-socket.on('bumper', function (data) {
-	console.log('Got bumper!', data)
+socket.on('bumper:down', function (data) {
+	console.log('Got bumper:down', data)
 	var bumperEl = document.getElementById('bumper-' + data.pos)
 	bumperEl.classList.add('hit')
 })
+
+socket.on('bumper:up', function (data) {
+	console.log('Got bumper:up', data)
+	var bumperEl = document.getElementById('bumper-' + data.pos)
+	bumperEl.classList.remove('hit')
+})
+

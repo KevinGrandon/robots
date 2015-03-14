@@ -13,9 +13,12 @@ pinio.on('ready', function(board) {
 		speed: 255, // Max is 255? Limit to avoid craziness for now.
 		turnSpeed: 175,
 
-		handleBumper: function(data) {
+		handleBumper: function(data, pressed) {
 			console.log('Got bumper', data.pos, data.pin)
-			io.sockets.emit('bumper', data)
+			io.sockets.emit('bumper:' + (pressed ? 'down' : 'up'), data)
+
+			// Stop the robot immediately on bumper hit
+			control.disable()
 		}
 	};
 
