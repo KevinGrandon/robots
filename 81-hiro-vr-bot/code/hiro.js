@@ -11,7 +11,12 @@ pinio.on('ready', function(board) {
 		speedRight: 0,
 
 		speed: 255, // Max is 255? Limit to avoid craziness for now.
-		turnSpeed: 175
+		turnSpeed: 175,
+
+		handleBumper: function(data) {
+			console.log('Got bumper', data.pos, data.pin)
+			io.sockets.emit('bumper', data)
+		}
 	};
 
 	control = require(__dirname + '/control.js')

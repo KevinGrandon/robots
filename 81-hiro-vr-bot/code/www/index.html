@@ -4,9 +4,15 @@
 	<title>HIRO</title>
 	<script src="/socket.io/socket.io.js"></script>
 	<script defer src="/ui_control.js"></script>
+	<link rel="stylesheet" href="/stylesheet.css">
 </head>
 <body>
 	<p>Use arrow keys to control HIRO.</p>
+	<div id="bumpers">
+		<div id="bumper-left" class="bumper"></div>
+		<div id="bumper-center" class="bumper"></div>
+		<div id="bumper-right" class="bumper"></div>
+	</div>
 	<div id="display"></div>
 </body>
 </html>

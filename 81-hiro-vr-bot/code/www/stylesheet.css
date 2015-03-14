@@ -1,0 +1,12 @@
+.bumper {
+	display: inline-box;
+	borer-box: padding-box;
+	width: calc(100% / 3);
+	height: 20px;
+	border: 1px solid #000;
+	background: #fff;
+}
+
+.bumper.hit {
+	background: #ff0000;
+}

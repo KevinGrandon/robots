@@ -35,3 +35,8 @@ document.body.addEventListener('keyup', e => {
 	currentKey = null;
 	socket.emit('stop');
 });
+
+socket.on('bumper', function (data) {
+	console.log('Got bumper!', data)
+	var bumperEl = document.getElementById('bumper-' + data.pos)
+})
