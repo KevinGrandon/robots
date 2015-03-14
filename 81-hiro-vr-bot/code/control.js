@@ -113,7 +113,7 @@ function rampSpeed(left, right) {
 		motor2Dir.low()
 
 
-	console.log('Writing speed: ', left, right, robot.speedLeft, robot.speedRight )
+	console.log('Writing speed: ', robot.speedLeft, robot.speedRight )
 
 	// Set timeout if we actually have more steps
 	if (left != robot.speedLeft || right != robot.speedRight) {
