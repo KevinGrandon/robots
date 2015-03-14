@@ -30,7 +30,7 @@ exports.init = function(_robot) {
  * This is false after a stop command.
  */
 var _pwnEnabled = false
-function enablePWM() {
+function enablePWMIfNeeded() {
 	if (_pwnEnabled) {
 		return
 	}
@@ -142,31 +142,31 @@ var control = {
 	 * Similar to abruptStop, but ramps down and decellerates the motor
 	 */
 	stop: function(){
-		enablePWM()
+		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(0, 0)
 	},
 
 	forward: function(){
-		enablePWM()
+		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(robot.speed, robot.speed)
 	},
 
 	backward: function(){
-		enablePWM()
+		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(0-robot.turnSpeed, 0-robot.turnSpeed)
 	},
 
 	leftTurn: function(){
-		enablePWM()
+		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(0-robot.turnSpeed, robot.turnSpeed)
 	},
 
 	rightTurn: function(){
-		enablePWM()
+		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(robot.speed, 0-robot.speed)
 	}
