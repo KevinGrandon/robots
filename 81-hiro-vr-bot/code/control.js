@@ -189,7 +189,7 @@ var control = {
 	tankControl: function(left, right) {
 		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
-		rampSpeed(robot.speed * (left / 100), robot.speed * (right / 100))
+		rampSpeed(robot.speed * (left / 100) * -1, robot.speed * (right / 100) * -1)
 	}
 }
 
