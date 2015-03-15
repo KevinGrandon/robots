@@ -41,7 +41,28 @@ app.use(express.static(__dirname + '/www'));
 io.on('connection', function (socket) {
 	console.log('got connection');
 
-	socket.on('start', function (data) {
+	// Gamepad API
+	socket.on('gamepad:tankcontrol:move', function (data) {
+		if (!control) {
+			console.log('Robot not initialized yet')
+			return
+		}
+		console.log('gamepad move', data)
+
+		control.tankControl(data.left, data.right)
+	})
+	
+	socket.on('gamepad:tankcontrol:stop', function (data) {
+		if (!control) {
+			console.log('Robot not initialized yet')
+			return
+		}
+		console.log('gamepad stop')
+		control.stop()
+	})
+
+	// Keyboard controls
+	socket.on('keybarod:singlekeydown', function (data) {
 		console.log('data is:', data);
 		var key = data.command;
 		var commandMap = {
@@ -65,7 +86,7 @@ io.on('connection', function (socket) {
 		control[robotMethod]()
 	})
 
-	socket.on('stop', function (data) {
+	socket.on('keybarod:singlekeyup', function (data) {
 		if (!control) {
 			console.log('Robot not initialized yet')
 			return

@@ -33,6 +33,11 @@ GamepadControl.prototype = {
 		// Require at least 10% movement.
 		if (Math.abs(left) < 10 && Math.abs(right) < 10) {
 			console.log('central pos, returning')
+			this.lastLeft = left
+			this.lastRight = right
+
+			// Notify the server that we've stopped.
+			socket.emit('gamepad:tankcontrol:stop');
 			return
 		}
 
@@ -40,7 +45,7 @@ GamepadControl.prototype = {
 		this.lastRight = right
 
 		console.log('left/right: ', left, right)
-		socket.emit('gamepad:tankcontrol', {
+		socket.emit('gamepad:tankcontrol:move', {
 			left: left,
 			right: right
 		});

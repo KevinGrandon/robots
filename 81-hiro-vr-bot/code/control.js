@@ -46,7 +46,6 @@ function enablePWMIfNeeded() {
  */
 var rampSpeedNext
 function rampSpeed(left, right) {
-
 	var nextLeft, nextRight
 	var step = 10
 
@@ -185,6 +184,12 @@ var control = {
 		enablePWMIfNeeded()
 		clearTimeout(rampSpeedNext)
 		rampSpeed(robot.speed, 0-robot.speed)
+	},
+
+	tankControl: function(left, right) {
+		enablePWMIfNeeded()
+		clearTimeout(rampSpeedNext)
+		rampSpeed(robot.speed * (left / 100), robot.speed * (right / 100))
 	}
 }
 
@@ -194,4 +199,4 @@ exports.forward = control.forward
 exports.backward = control.backward
 exports.leftTurn = control.leftTurn
 exports.rightTurn = control.rightTurn
-
+exports.tankControl = control.tankControl

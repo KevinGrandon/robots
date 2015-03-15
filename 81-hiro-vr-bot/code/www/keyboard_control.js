@@ -23,7 +23,7 @@ KeyboardControl.prototype = {
 
 		currentKey = e.key;
 
-		socket.emit('start', {
+		socket.emit('keybarod:singlekeydown', {
 			command: e.key.toLowerCase()
 		});
 		console.log(e);
@@ -39,7 +39,7 @@ KeyboardControl.prototype = {
 		}
 
 		currentKey = null;
-		socket.emit('stop');
+		socket.emit('keybarod:singlekeyup');
 	},
 
 	start: function() {
