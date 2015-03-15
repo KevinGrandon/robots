@@ -44,7 +44,7 @@ GamepadControl.prototype = {
 		this.lastLeft = left
 		this.lastRight = right
 
-		console.log('left/right: ', left, right)
+		display.innerHTML = 'Gamepad Tank Control (L/R): ' + left + ' - ' + right;
 		socket.emit('gamepad:tankcontrol:move', {
 			left: left,
 			right: right
