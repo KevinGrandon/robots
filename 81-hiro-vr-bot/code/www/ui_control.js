@@ -9,32 +9,21 @@ var currentKey = null;
 
 var display = document.getElementById('display')
 
-document.body.addEventListener('keydown', e => {
-	display.innerHTML = 'Command start: ' + e.key;
-	if (e.key === currentKey) {
-		return;
-	}
+var inputControl = new KeyboardControl()
 
-	currentKey = e.key;
+window.addEventListener('gamepadconnected', function(e) {
+	console.log('Gamepad connected at index %d: %s. %d buttons, %d axes.',
+		e.gamepad.index, e.gamepad.id, e.gamepad.buttons.length, e.gamepad.axes.length);
+	inputControl.stop()
+	inputControl = new GamepadControl()
+}); 
 
-	socket.emit('start', {
-		command: e.key.toLowerCase()
-	});
-	console.log(e);
-});
+window.addEventListener('gamepaddisconnected', function(e) {
+	console.log('Gamepad disconnected.')
+	inputControl.stop()
+	inputControl = new KeyboardControl()
+}); 
 
-document.body.addEventListener('keyup', e => {
-	display.innerHTML = 'Command end: ' + e.key;
-
-	// If the key is different, we assume we're doing something else.
-	if (e.key !== currentKey) {
-		currentKey = null;
-		return;
-	}
-
-	currentKey = null;
-	socket.emit('stop');
-});
 
 socket.on('bumper:down', function (data) {
 	console.log('Got bumper:down', data)
