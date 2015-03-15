@@ -38,13 +38,14 @@ GamepadControl.prototype = {
 
 			// Notify the server that we've stopped.
 			socket.emit('gamepad:tankcontrol:stop');
+			display.innerHTML = 'Gamepad Tank Control (stopped)';
 			return
 		}
 
 		this.lastLeft = left
 		this.lastRight = right
 
-		display.innerHTML = 'Gamepad Tank Control (L/R): ' + left + ' - ' + right;
+		display.innerHTML = 'Gamepad Tank Control (L/R): ' + left + '/' + right;
 		socket.emit('gamepad:tankcontrol:move', {
 			left: left,
 			right: right
