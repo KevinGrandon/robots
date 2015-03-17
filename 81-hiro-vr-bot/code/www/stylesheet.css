@@ -7,12 +7,14 @@ body {
 	justify-content: space-around;
 	width: 640px;
 	position: absolute;
+	margin-top: 10px;
+	opacity: 0.5;
 }
 
 .bumper {
 	height: 40px;
 	border-radius: 6px;
-	border: 1px solid #000;
+	border: 1px solid #777;
 	background: none;
 	width: 31%;
 }
