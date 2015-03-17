@@ -42,4 +42,6 @@ socket.on('stream:data', function(url) {
 	stream.setAttribute('src', url)
 })
 
+// Initialize the image to the last stream image.
+stream.setAttribute('src', 'image_stream.jpg')
 socket.emit('stream:start')
