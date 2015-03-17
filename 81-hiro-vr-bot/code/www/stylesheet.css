@@ -4,15 +4,17 @@ body {
 
 #bumpers {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
+	width: 640px;
+	position: absolute;
 }
 
 .bumper {
 	height: 40px;
 	border-radius: 6px;
 	border: 1px solid #000;
-	background: #fff;
-	width: 32%;
+	background: none;
+	width: 31%;
 }
 
 .bumper.hit {
