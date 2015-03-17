@@ -37,3 +37,9 @@ socket.on('bumper:up', function (data) {
 	bumperEl.classList.remove('hit')
 })
 
+var stream = document.getElementById('stream')
+socket.on('stream:data', function(url) {
+	stream.setAttribute('src', url)
+})
+
+socket.emit('stream:start')
