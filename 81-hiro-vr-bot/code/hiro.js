@@ -1,5 +1,6 @@
 var pinio = new (require('pinio')).Pinio()
 
+var fs = require('fs')
 var spawn = require('child_process').spawn;
 var proc;
 
