@@ -3,6 +3,11 @@
 
 BioloidController bioloid = BioloidController(1000000);
 
+// Octopod pin constants.
+// Looking down at the octopod's back, with the head at the top.
+int 
+
+// AX Servo Constants
 #define AX_SYNC_WRITE 131
 #define AX_GOAL_POSITION_L 30
 
