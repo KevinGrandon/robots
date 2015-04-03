@@ -1,11 +1,10 @@
-#include <ax12.h>
-#include <BioloidController.h>
+#include "ax12.h"
+#include "BioloidController.h"
 
 BioloidController bioloid = BioloidController(1000000);
 
 #define AX_SYNC_WRITE 131
 #define AX_GOAL_POSITION_L 30
-#define BIOLOID_SHIFT 3
 
 void servoWrite(int id, int pos, int spd){
     int poseSize = 1;
