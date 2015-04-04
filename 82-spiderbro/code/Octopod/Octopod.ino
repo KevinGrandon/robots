@@ -1,9 +1,9 @@
-#include <ax12.h>
-#include <BioloidController.h>
+#include "ax12.h"
+#include "BioloidController.h"
 #include "poses.h"
 
 // Enable to use XBee
-#define USE_XBEE
+//#define USE_XBEE
 
 // Uncomment to step through each gait as we receive commands.
 // #define STEP_THROUGH_GAITS
