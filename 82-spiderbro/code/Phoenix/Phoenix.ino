@@ -42,7 +42,7 @@
 #include "Hex_Cfg.h"
 #endif
 
-#include <ax12.h>
+#include "ax12.h"
 #include "_Phoenix.h"
 
 #ifdef QUADMODE

@@ -26,7 +26,7 @@
  *  PROGMEM transition_t name[] = {{NULL,count},{pose_name,1000},...} 
  */
 
-#include <ax12.h>
+#include "ax12.h"
 
 /* pose engine runs at 30Hz (33ms between frames) 
    recommended values for interpolateSetup are of the form X*BIOLOID_FRAME_LENGTH - 1 */
