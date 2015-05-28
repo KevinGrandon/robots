@@ -17,13 +17,23 @@ board.on('ready', function() {
     }
   });
 
-  motor1.forward(255);
-  motor2.forward(255);
+  function motorControl(out) {
+    var velocity = Math.abs(out);
+    if (velocity < 0) {
+      velocity = 0;
+    }
+    if (velocity > 255) {
+      velocity = 255;
+    }
 
-  setTimeout(function() {
-    motor1.stop();
-    motor2.stop();
-  }, 4000);
+    if (out > 0) {
+      motor1.forward(velocity);
+      motor2.forward(velocity);
+    } else {
+      motor1.reverse(velocity);
+      motor2.reverse(velocity);
+    }
+  }
 
   var imu = new five.IMU({
     controller: 'MPU6050'
