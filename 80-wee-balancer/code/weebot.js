@@ -77,11 +77,11 @@ board.on('ready', function() {
     }
 
     if (out > 0) {
-      motor1.forward(velocity);
-      motor2.forward(velocity);
-    } else {
       motor1.reverse(velocity);
       motor2.reverse(velocity);
+    } else {
+      motor1.forward(velocity);
+      motor2.forward(velocity);
     }
   }
 
